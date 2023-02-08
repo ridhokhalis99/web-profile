@@ -1,0 +1,41 @@
+---
+export interface Props {
+  index: number;
+  title: string;
+}
+
+const { index, title } = Astro.props;
+---
+
+<div class="container">
+  <span>0{index}.</span>
+  <h1>{title}</h1>
+  <div class="line"></div>
+</div>
+
+<style lang="scss">
+  .container {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 40px;
+    align-items: center;
+
+    span {
+      color: var(--primary-color);
+      font-family: var(--mono);
+      font-size: 28px;
+    }
+
+    h1 {
+      font-size: 32px;
+      color: var(--light-slate);
+    }
+
+    .line {
+      margin-left: 24px;
+      width: 300px;
+      height: 1px;
+      background-color: var(--slate);
+    }
+  }
+</style>

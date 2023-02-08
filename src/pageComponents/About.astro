@@ -1,4 +1,138 @@
 ---
+import SectionHeader from "../components/SectionHeader.astro";
+
+const techskills = [
+  "Javascript",
+  "Typescript",
+  "React",
+  "NestJs",
+  "Astro",
+  "NextJs",
+  "Node.js",
+  "Sass",
+  "Express",
+];
 ---
 
-<section></section>
+<section id="about">
+  <div class="section-content">
+    <SectionHeader title="About Me" index={1} />
+    <div class="content-container">
+      <div class="text-container">
+        <p>
+          Hello! My name is <span class="primary-mono">Ridho Khalis</span> and I'm
+          a software engineer with a passion for crafting digital experiences. As
+          a frontend developer, I enjoy using my obsessive attention to detail, and
+          my technical skills to create beautiful and user-friendly websites and
+          applications.
+        </p>
+        <p>
+          As of now, my main emphasis is on growing my knowledge and proficiency
+          in frontend development, striving to create exceptional and
+          user-centered digital experiences.
+        </p>
+        <p>These are a few technologies i've been working with recently:</p>
+        <ul>
+          {techskills.map((skill) => <li>{skill}</li>)}
+        </ul>
+      </div>
+      <div class="image-container">
+        <div class="image-overlay"></div>
+        <img src="/assets/profile.jpeg" alt="profile image" />
+        <div class="image-border-offset"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  section {
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+      height: 100%;
+
+      .content-container {
+        display: grid;
+        grid-template-columns: 3fr 2fr;
+        gap: 60px;
+
+        .text-container {
+          display: flex;
+          flex-direction: column;
+          gap: 24px;
+
+          ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(3, minmax(140px, 200px));
+
+            li:before {
+              content: "▹";
+              margin-right: 12px;
+              color: var(--primary-color);
+              line-height: 12px;
+            }
+          }
+
+          .primary-mono {
+            letter-spacing: 0;
+          }
+        }
+
+        .image-container {
+          position: relative;
+          display: flex;
+
+          img {
+            width: 300px;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 12px;
+            position: relative;
+            z-index: 2;
+            filter: grayscale(1);
+          }
+
+          .image-overlay {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 12px;
+            background-color: var(--primary-color);
+            opacity: 0.4;
+            z-index: 5;
+            transition: opacity 0.2s ease-in-out;
+
+            &:hover {
+              opacity: 0;
+
+              & + img {
+                filter: none;
+              }
+
+              & + .image-border-offset {
+                margin-left: 12px;
+                margin-top: 12px;
+              }
+            }
+          }
+
+          .image-border-offset {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 12px;
+            border: 1px solid var(--primary-color);
+            margin-left: 20px;
+            margin-top: 20px;
+            z-index: 1;
+            transition: margin 0.2s ease-in-out;
+          }
+        }
+      }
+    }
+  }
+</style>
