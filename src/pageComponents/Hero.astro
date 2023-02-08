@@ -1,0 +1,56 @@
+---
+---
+
+<section>
+  <div class="section-content">
+    <p class="primary-mono">Hi, my name is</p>
+    <h1 class="name">Ridho Khalis.</h1>
+    <p class="profession">I'm a web developer.</p>
+    <p class="introduction">
+      I'm a web developer focusing on front-end development and sometimes do
+      back-end development. I'm currently working as a front-end developer at
+      <a class="link" href="https://neo.transfez.com/" target="_blank"
+        >Transfez</a
+      >.
+    </p>
+    <button>Check my resume</button>
+  </div>
+</section>
+
+<style lang="scss">
+  section {
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+      height: 100%;
+
+      .name {
+        font-size: 72px;
+        font-weight: 700;
+        color: var(--light-slate);
+        margin-top: 12px;
+        margin-bottom: -16px;
+      }
+
+      .profession {
+        font-size: 72px;
+        font-weight: 700;
+        color: var(--slate);
+      }
+
+      .introduction {
+        font-size: 16px;
+        font-weight: 400;
+        color: var(--slate);
+        max-width: 55%;
+        line-height: 28px;
+      }
+
+      button {
+        margin-top: 32px;
+      }
+    }
+  }
+</style>

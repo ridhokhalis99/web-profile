@@ -1,35 +1,251 @@
 ---
 export interface Props {
-	title: string;
+  title: string;
 }
 
+import Github from "../icons/Github.astro";
+import Instagram from "../icons/Instagram.astro";
+import Linkedin from "../icons/Linkedin.astro";
+
 const { title } = Astro.props;
+
+const navLinks = [
+  {
+    name: "About Me",
+    href: "#about",
+  },
+  {
+    name: "Projects",
+    href: "#projects",
+  },
+  {
+    name: "Contact",
+    href: "#contact",
+  },
+];
+
+const socialLinks = [
+  {
+    name: "Github",
+    href: "/",
+    component: Github,
+  },
+  {
+    name: "Linkedin",
+    href: "/",
+    component: Linkedin,
+  },
+  {
+    name: "Instagram",
+    href: "/",
+    component: Instagram,
+  },
+];
 ---
 
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <nav>
+      <div class="navbar-container">
+        <a class="logo" href="/">ridhoKhalis</a>
+        <div class="navlink-container">
+          {
+            navLinks.map((navLink, index) => (
+              <a class="nav-link" href={navLink.href}>
+                <span class="nav-link-index">{`0${index + 1}.`}</span>
+                {navLink.name}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+    </nav>
+    <slot />
+    <div class="social-container">
+      {
+        socialLinks.map((socialLink) => (
+          <a href={socialLink.href}>{<socialLink.component />}</a>
+        ))
+      }
+      <div class="line"></div>
+    </div>
+    <div class="email-container">
+      <a href="mailto:Ridhokhalis37@gmail.com">Ridhokhalis37@gmail.com</a>
+      <div class="line"></div>
+    </div>
+  </body>
+
+  <style is:global lang="scss">
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ubuntu+Mono:wght@400;700&display=swap");
+    :root {
+      --bg-primary: #0b192f;
+      --primary-color: #64ffda;
+      --light-slate: #ccd6f6;
+      --slate: #8892b0;
+      --white: #fff;
+
+      --mono: "Ubuntu Mono", monospace;
+      --sans: "Poppins", system-ui, sans-serif;
+    }
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    html {
+      font-family: "Poppins", system-ui, sans-serif;
+    }
+    a {
+      text-decoration: none;
+    }
+    button {
+      width: fit-content;
+      padding: 16px 24px;
+      border: 1px solid var(--primary-color);
+      background-color: transparent;
+      color: var(--primary-color);
+      border-radius: 4px;
+      font-family: var(--mono);
+      text-transform: capitalize;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--primary-color);
+        color: var(--bg-primary);
+      }
+    }
+    section {
+      background-color: var(--bg-primary);
+      height: 100vh;
+      color: var(--slate);
+      padding: 50px;
+
+      .section-content {
+        margin: auto;
+        max-width: 1600px;
+      }
+    }
+    nav {
+      background-color: var(--bg-primary);
+      padding: 50px;
+      position: absolute;
+      top: 0;
+      width: calc(100% - 100px);
+
+      .navbar-container {
+        display: flex;
+        justify-content: space-between;
+        margin: auto;
+        max-width: 1600px;
+
+        a {
+          color: var(--white);
+        }
+
+        .logo {
+          font-size: 24px;
+          font-weight: 700;
+          letter-spacing: 1px;
+          color: var(--primary-color);
+          font-family: var(--mono);
+        }
+
+        .navlink-container {
+          display: flex;
+          gap: 24px;
+
+          .nav-link {
+            font-family: var(--mono);
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+
+            .nav-link-index {
+              color: var(--primary-color);
+            }
+          }
+        }
+      }
+    }
+    .social-container {
+      position: sticky;
+      margin-left: 48px;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 20px;
+
+      .social-icon {
+        stroke: var(--light-slate);
+        transition: all 0.3s ease-in-out;
+
+        &:hover {
+          stroke: var(--primary-color);
+          transform: translateY(-8px);
+        }
+      }
+
+      .line {
+        width: 1px;
+        height: 12vh;
+        background-color: var(--light-slate);
+        margin: auto;
+        margin-top: 24px;
+      }
+    }
+
+    .email-container {
+      position: sticky;
+      margin-left: auto;
+      margin-right: 48px;
+      bottom: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      width: 20px;
+
+      a {
+        font-family: var(--mono);
+        color: var(--light-slate);
+        transition: all 0.3s ease-in-out;
+        writing-mode: vertical-rl;
+        letter-spacing: 2px;
+        font-size: 16px;
+
+        &:hover {
+          color: var(--primary-color);
+          transform: translateY(-8px);
+        }
+      }
+
+      .line {
+        width: 1px;
+        height: 12vh;
+        background-color: var(--light-slate);
+        margin: auto;
+        margin-top: 24px;
+      }
+    }
+
+    .primary-mono {
+      font-family: var(--mono);
+      color: var(--primary-color);
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+
+    .link {
+      font-family: var(--mono);
+      color: var(--primary-color);
+    }
+  </style>
 </html>
-<style is:global>
-	:root {
-		--accent: 124, 58, 237;
-		--accent-gradient: linear-gradient(45deg, rgb(var(--accent)), #da62c4 30%, white 60%);
-	}
-	html {
-		font-family: system-ui, sans-serif;
-		background-color: #F6F6F6;
-	}
-	code {
-		font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-			Bitstream Vera Sans Mono, Courier New, monospace;
-	}
-</style>
