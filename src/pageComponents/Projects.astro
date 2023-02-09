@@ -1,0 +1,91 @@
+---
+import ProjectItem from "../components/ProjectItem.astro";
+import SectionHeader from "../components/SectionHeader.astro";
+
+const projects = [
+  {
+    imageSrc: "/assets/images/projects/kanban.png",
+    title: "Kanban",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, ",
+    techStack: ["React", "Next.js", "Tailwind"],
+    githubLink: "",
+    liveLink: "",
+  },
+  {
+    imageSrc: "/assets/images/projects/designo.png",
+    title: "Designo",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, ",
+    techStack: ["React", "Next.js", "Tailwind"],
+    githubLink: "",
+    liveLink: "",
+  },
+  {
+    imageSrc: "/assets/images/projects/planets-fact-site.png",
+    title: "Planets Fact Site",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nisl a ultricies lacinia, nisl nisl aliquam nisl, eu aliqu, ",
+    techStack: ["React", "Next.js", "Tailwind"],
+    githubLink: "",
+    liveLink: "",
+  },
+];
+---
+
+<section id="projects">
+  <div class="section-content">
+    <SectionHeader index={2} title="Some things i've built" />
+    <div class="projects-container">
+      {
+        projects.map((project) => (
+          <ProjectItem
+            imageSrc={project.imageSrc}
+            title={project.title}
+            description={project.description}
+            techStack={project.techStack}
+            githubLink={project.githubLink}
+            liveLink={project.liveLink}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss" is:global>
+  section {
+    .section-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 64px;
+      height: 100%;
+
+      .projects-container {
+        display: flex;
+        flex-direction: column;
+        gap: 92px;
+        margin-top: 32px;
+
+        .project {
+          display: flex;
+        }
+
+        .project:nth-child(even) {
+          flex-direction: row-reverse;
+
+          .project-content {
+            align-items: flex-start;
+            padding-left: 0;
+
+            .project-description {
+              left: 0;
+              text-align: left;
+            }
+          }
+        }
+      }
+    }
+  }
+</style>

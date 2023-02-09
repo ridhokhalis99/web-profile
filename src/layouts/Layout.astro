@@ -55,7 +55,11 @@ const socialLinks = [
   <body>
     <nav>
       <div class="navbar-container">
-        <a class="logo" href="/">ridhoKhalis</a>
+        <a class="logo" href="/"
+          ><span class="logo-tag">{"<"}</span>RidhoKhalis<span class="logo-tag"
+            >{"/>"}</span
+          ></a
+        >
         <div class="navlink-container">
           {
             navLinks.map((navLink, index) => (
@@ -86,10 +90,13 @@ const socialLinks = [
   <style is:global lang="scss">
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Ubuntu+Mono:wght@400;700&display=swap");
     :root {
-      --bg-primary: #0b192f;
+      --navy-shadow: rgba(2, 12, 27, 0.7);
+      --navy: #0b192f;
+      --light-navy: #112240;
       --primary-color: #64ffda;
       --light-slate: #ccd6f6;
       --slate: #8892b0;
+      --dark-slate: #495670;
       --white: #fff;
 
       --mono: "Ubuntu Mono", monospace;
@@ -101,6 +108,7 @@ const socialLinks = [
     }
     html {
       font-family: "Poppins", system-ui, sans-serif;
+      background-color: var(--navy);
     }
     a {
       text-decoration: none;
@@ -119,12 +127,11 @@ const socialLinks = [
 
       &:hover {
         background-color: var(--primary-color);
-        color: var(--bg-primary);
+        color: var(--navy);
       }
     }
     section {
-      background-color: var(--bg-primary);
-      height: 70vh;
+      height: fit-content;
       color: var(--slate);
       padding: 50px;
 
@@ -134,7 +141,6 @@ const socialLinks = [
       }
     }
     nav {
-      background-color: var(--bg-primary);
       padding: 50px;
       position: absolute;
       top: 0;
@@ -156,6 +162,10 @@ const socialLinks = [
           letter-spacing: 1px;
           color: var(--primary-color);
           font-family: var(--mono);
+
+          .logo-tag {
+            color: var(--white);
+          }
         }
 
         .navlink-container {
@@ -234,6 +244,19 @@ const socialLinks = [
         margin: auto;
         margin-top: 24px;
       }
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--dark-slate);
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--navy);
     }
 
     .primary-mono {
