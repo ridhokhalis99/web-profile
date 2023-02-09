@@ -1,0 +1,46 @@
+---
+import OtherProjectItem from "../components/OtherProjectItem.astro";
+import Projects from "./Projects.astro";
+import otherProjects from "../../public/data/otherProjects";
+---
+
+<section>
+  <div class="section-content">
+    <h2 class="title">Other Noteworthy Projects</h2>
+    <div class="other-projects-container">
+      {
+        otherProjects.map((project) => (
+          <OtherProjectItem
+            title={project.title}
+            description={project.description}
+            techStack={project.techStack}
+            githubLink={project.githubLink}
+            liveLink={project.liveLink}
+          />
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style lang="scss">
+  section {
+    height: 100vh;
+
+    .section-content {
+      text-align: center;
+
+      .title {
+        color: var(--light-slate);
+        margin-bottom: 40px;
+      }
+
+      .other-projects-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 32px;
+        gap: 32px;
+      }
+    }
+  }
+</style>

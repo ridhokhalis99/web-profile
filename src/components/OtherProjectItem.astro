@@ -1,0 +1,116 @@
+---
+import ExternalLink from "../icons/ExternalLink.astro";
+import Folder from "../icons/Folder.astro";
+import Github from "../icons/Github.astro";
+
+export interface Props {
+  title: string;
+  description: string;
+  techStack: string[];
+  githubLink: string;
+  liveLink?: string;
+}
+
+const { title, description, techStack, githubLink, liveLink } = Astro.props;
+---
+
+<div class="other-project-item">
+  <div class="project-item-header">
+    <div class="folder">
+      <Folder />
+    </div>
+    <div class="project-links">
+      <a href="/">
+        <Github />
+      </a>
+      <a href="/">
+        <ExternalLink />
+      </a>
+    </div>
+  </div>
+  <div class="project-content">
+    <a class="project-title" href={githubLink}>{title}</a>
+    <p>{description}</p>
+    <div class="tech-stack">
+      {techStack.map((tech) => <span class="tech">{tech}</span>)}
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  .other-project-item {
+    background-color: var(--light-navy);
+    padding: 28px;
+    text-align: left;
+    border-radius: 4px;
+    transition: all 0.3s ease-in-out;
+
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 10px 30px -15px var(--navy-shadow);
+
+      & + .project-content {
+        .project-title {
+          color: var(--primary-color);
+        }
+      }
+    }
+
+    .project-item-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 12px;
+
+      .folder {
+        width: 36px;
+      }
+
+      .project-links {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        align-items: flex-end;
+        gap: 16px;
+
+        a {
+          color: var(--light-slate);
+          transition: all 0.3s ease-in-out;
+          width: 20px;
+
+          &:hover {
+            color: var(--primary-color);
+            transform: translateY(-8px);
+          }
+        }
+      }
+    }
+
+    .project-content {
+      .project-title {
+        color: var(--light-slate);
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      p {
+        color: var(--slate);
+        font-size: 14px;
+        line-height: 1.5;
+        margin-top: 16px;
+        margin-bottom: 24px;
+        font-weight: 300;
+      }
+
+      .tech-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+
+        .tech {
+          font-family: var(--mono);
+          font-size: 14px;
+          font-weight: 300;
+        }
+      }
+    }
+  }
+</style>
