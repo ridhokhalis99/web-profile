@@ -72,7 +72,9 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
       display: flex;
       flex-direction: column;
       align-items: flex-end;
+      justify-content: center;
       position: relative;
+      right: 50px;
 
       .project-title {
         color: var(--lightest-slate);
@@ -85,20 +87,21 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
         padding: 24px;
         width: 480px;
         background-color: var(--light-navy);
-        position: absolute;
-        top: 88px;
+        position: relative;
+        top: 32px;
         right: 0px;
         z-index: 5;
         box-shadow: 0 10px 30px -15px var(--navy-shadow);
       }
 
       .tech-stack {
-        margin-top: 232px;
+        margin-top: 60px;
         display: flex;
         gap: 24px;
 
         .tech {
           font-family: var(--mono);
+          font-size: 14px;
         }
       }
 

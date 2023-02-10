@@ -2,6 +2,7 @@
 import ProjectItem from "../components/ProjectItem.astro";
 import SectionHeader from "../components/SectionHeader.astro";
 import projects from "../../public/data/projects";
+import OtherProjects from "./OtherProjects.astro";
 ---
 
 <section id="projects">
@@ -23,6 +24,7 @@ import projects from "../../public/data/projects";
     </div>
   </div>
 </section>
+<OtherProjects />
 
 <style lang="scss" is:global>
   section {
@@ -49,6 +51,8 @@ import projects from "../../public/data/projects";
           .project-content {
             align-items: flex-start;
             padding-left: 0;
+            position: relative;
+            left: 50px;
 
             .project-description {
               left: 0;
