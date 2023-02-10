@@ -49,7 +49,7 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
       transform: translateY(-8px);
       box-shadow: 0 10px 30px -15px var(--navy-shadow);
 
-      & + .project-content {
+      .project-content {
         .project-title {
           color: var(--primary-color);
         }
@@ -89,6 +89,7 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
         color: var(--lightest-slate);
         font-size: 18px;
         font-weight: 700;
+        transition: all 0.3s ease-in-out;
       }
 
       p {
