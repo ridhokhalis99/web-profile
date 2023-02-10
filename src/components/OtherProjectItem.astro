@@ -20,17 +20,21 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
       <Folder />
     </div>
     <div class="project-links">
-      <a href="/">
+      <a href={githubLink}>
         <Github />
       </a>
-      <a href="/">
-        <ExternalLink />
-      </a>
+      {
+        liveLink && (
+          <a href={liveLink}>
+            <ExternalLink />
+          </a>
+        )
+      }
     </div>
   </div>
   <div class="project-content">
-    <a class="project-title" href={githubLink}>{title}</a>
-    <p>{description}</p>
+    <a class="project-title" href={liveLink ? liveLink : githubLink}>{title}</a>
+    <p class="project-description">{description}</p>
     <div class="tech-stack">
       {techStack.map((tech) => <span class="tech">{tech}</span>)}
     </div>
@@ -66,8 +70,7 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
       }
 
       .project-links {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
+        display: flex;
         align-items: flex-end;
         gap: 16px;
 
@@ -92,8 +95,9 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
         transition: all 0.3s ease-in-out;
       }
 
-      p {
+      .project-description {
         color: var(--light-slate);
+        height: 100px;
         font-size: 14px;
         line-height: 1.5;
         margin-top: 16px;
