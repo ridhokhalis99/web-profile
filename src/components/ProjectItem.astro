@@ -22,7 +22,7 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
   </div>
   <div class="project-content">
     <h3 class="primary-mono">Featured Project</h3>
-    <h2 class="project-title">{title}</h2>
+    <a class="project-title">{title}</a>
     <p class="project-description">{description}</p>
     <div class="tech-stack">
       {techStack.map((tech) => <span class="tech">{tech}</span>)}
@@ -79,6 +79,14 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
       .project-title {
         color: var(--lightest-slate);
         margin-top: 8px;
+        font-size: 24px;
+        font-weight: 700;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          color: var(--primary-color);
+        }
       }
 
       .project-description {
