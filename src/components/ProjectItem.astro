@@ -28,10 +28,10 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
       {techStack.map((tech) => <span class="tech">{tech}</span>)}
     </div>
     <div class="project-links">
-      <a href={githubLink}>
+      <a href={githubLink} target="_blank">
         <Github />
       </a>
-      <a href={liveLink}>
+      <a href={liveLink} target="_blank">
         <ExternalLink />
       </a>
     </div>

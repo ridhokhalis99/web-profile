@@ -20,12 +20,12 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
       <Folder />
     </div>
     <div class="project-links">
-      <a href={githubLink}>
+      <a href={githubLink} target="_blank">
         <Github />
       </a>
       {
         liveLink && (
-          <a href={liveLink}>
+          <a href={liveLink} target="_blank">
             <ExternalLink />
           </a>
         )
@@ -33,7 +33,11 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
     </div>
   </div>
   <div class="project-content">
-    <a class="project-title" href={liveLink ? liveLink : githubLink}>{title}</a>
+    <a
+      class="project-title"
+      href={liveLink ? liveLink : githubLink}
+      target="_blank">{title}</a
+    >
     <p class="project-description">{description}</p>
     <div class="tech-stack">
       {techStack.map((tech) => <span class="tech">{tech}</span>)}
