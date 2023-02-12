@@ -35,12 +35,20 @@
         color: var(--lightest-slate);
         margin-top: 12px;
         margin-bottom: -16px;
+
+        @media (max-width: 768px) {
+          font-size: 48px;
+        }
       }
 
       .profession {
         font-size: 72px;
         font-weight: 700;
         color: var(--slate);
+
+        @media (max-width: 768px) {
+          font-size: 48px;
+        }
       }
 
       .introduction {
@@ -49,6 +57,11 @@
         color: var(--slate);
         max-width: 55%;
         line-height: 28px;
+        margin-top: 12px;
+
+        @media (max-width: 768px) {
+          max-width: 100%;
+        }
       }
 
       button {

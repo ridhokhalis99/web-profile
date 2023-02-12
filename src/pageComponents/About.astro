@@ -58,9 +58,13 @@ const techskills = [
 
       .content-container {
         display: grid;
-
         grid-template-columns: 3fr 2fr;
         gap: 60px;
+
+        @media screen and (max-width: 768px) {
+          grid-template-columns: 1fr;
+          gap: 80px;
+        }
 
         .text-container {
           display: flex;
