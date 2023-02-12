@@ -1,12 +1,10 @@
 ---
+import socialLinks from "../../public/data/socialLinks";
 export interface Props {
   title: string;
 }
 
 import NavMenu from "../components/NavMenu.astro";
-import Github from "../icons/Github.astro";
-import Instagram from "../icons/Instagram.astro";
-import Linkedin from "../icons/Linkedin.astro";
 
 const { title } = Astro.props;
 
@@ -22,24 +20,6 @@ const navLinks = [
   {
     name: "Contact",
     href: "#contact",
-  },
-];
-
-const socialLinks = [
-  {
-    name: "Github",
-    href: "/",
-    component: Github,
-  },
-  {
-    name: "Linkedin",
-    href: "/",
-    component: Linkedin,
-  },
-  {
-    name: "Instagram",
-    href: "/",
-    component: Instagram,
   },
 ];
 ---
@@ -78,7 +58,9 @@ const socialLinks = [
     <div class="social-container">
       {
         socialLinks.map((socialLink) => (
-          <a href={socialLink.href}>{<socialLink.component />}</a>
+          <a href={socialLink.href} target="_blank">
+            {<socialLink.component />}
+          </a>
         ))
       }
       <div class="line"></div>
@@ -143,6 +125,10 @@ const socialLinks = [
       height: fit-content;
       color: var(--slate);
       padding: 50px;
+
+      @media screen and (max-width: 768px) {
+        padding: 50px 0;
+      }
 
       .section-content {
         margin: auto;
@@ -252,6 +238,10 @@ const socialLinks = [
       gap: 16px;
       width: 20px;
 
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
+
       .social-icon {
         stroke: var(--lightest-slate);
         transition: all 0.3s ease-in-out;
@@ -279,6 +269,10 @@ const socialLinks = [
       flex-direction: column;
       gap: 16px;
       width: 20px;
+
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
 
       a {
         font-family: var(--mono);
