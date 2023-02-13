@@ -107,6 +107,10 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
         margin-top: 16px;
         margin-bottom: 24px;
         font-weight: 300;
+
+        @media (max-width: 768px) {
+          height: 160px;
+        }
       }
 
       .tech-stack {

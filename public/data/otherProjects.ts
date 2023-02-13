@@ -16,7 +16,7 @@ const otherProjects = [
   {
     title: "ColorSrc",
     description:
-      "A Vue based web app that allows users to generate color palettes by type from 3rd party API, and store them in their account. It also provide upload photo and payment features",
+      "A Vue based web app for generate color palettes by type from 3rd party API, and store them in their account. It also provide upload photo and payment features",
     techStack: ["Vue", "Pinia", "Javascript", "Tailwind", "Heroku"],
     githubLink: "https://github.com/ridhokhalis99/colorsrc.git",
   },

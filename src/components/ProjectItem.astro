@@ -50,6 +50,13 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
         z-index: 5;
         transition: opacity 0.2s ease-in-out;
 
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          max-width: calc(100vw - 128px);
+          background-color: var(--dark-primary-color);
+          opacity: 0.95;
+        }
+
         &:hover {
           opacity: 0;
 
@@ -64,6 +71,12 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
         height: 400px;
         object-fit: cover;
         filter: grayscale(1);
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          max-width: calc(100vw - 128px);
+          position: absolute;
+        }
       }
     }
 
@@ -75,6 +88,13 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
       justify-content: center;
       position: relative;
       right: 50px;
+
+      @media screen and (max-width: 768px) {
+        left: 0;
+        align-items: flex-start;
+        z-index: 5;
+        padding: 64px 32px;
+      }
 
       .project-title {
         color: var(--lightest-slate);
@@ -100,12 +120,21 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
         right: 0px;
         z-index: 5;
         box-shadow: 0 10px 30px -15px var(--navy-shadow);
+
+        @media screen and (max-width: 768px) {
+          width: 100%;
+          background-color: transparent;
+          box-shadow: none;
+          padding: 0;
+          text-align: left;
+        }
       }
 
       .tech-stack {
         margin-top: 60px;
         display: flex;
         gap: 24px;
+        flex-wrap: wrap;
 
         .tech {
           font-family: var(--mono);

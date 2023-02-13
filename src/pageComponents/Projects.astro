@@ -48,11 +48,22 @@ import OtherProjects from "./OtherProjects.astro";
         .project:nth-child(even) {
           flex-direction: row-reverse;
 
+          @media (max-width: 768px) {
+            flex-direction: row;
+          }
+
           .project-content {
             align-items: flex-start;
             padding-left: 0;
             position: relative;
             left: 50px;
+
+            @media (max-width: 768px) {
+              left: 0;
+              align-items: flex-start;
+              z-index: 5;
+              padding: 64px 32px;
+            }
 
             .project-description {
               left: 0;
