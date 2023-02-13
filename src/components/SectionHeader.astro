@@ -18,6 +18,7 @@ const { index, title } = Astro.props;
     display: flex;
     margin-bottom: 40px;
     align-items: center;
+    flex-wrap: nowrap;
 
     span {
       color: var(--primary-color);
@@ -28,6 +29,7 @@ const { index, title } = Astro.props;
     h1 {
       font-size: 32px;
       color: var(--lightest-slate);
+      white-space: nowrap;
 
       @media screen and (max-width: 480px) {
         font-size: 24px;
@@ -36,18 +38,10 @@ const { index, title } = Astro.props;
 
     .line {
       margin-left: 24px;
-      width: 300px;
       height: 1px;
+      width: 100%;
       background-color: var(--slate);
-
-      @media screen and (max-width: 1024px) and (min-height: 481px) {
-        max-width: 240px;
-      }
-
-      @media screen and (max-width: 480px) {
-        margin-left: 12px;
-        max-width: 80px;
-      }
+      flex-basis: auto;
     }
   }
 </style>
