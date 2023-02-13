@@ -16,7 +16,6 @@ const { index, title } = Astro.props;
 <style lang="scss">
   .container {
     display: flex;
-    gap: 10px;
     margin-bottom: 40px;
     align-items: center;
 
@@ -46,6 +45,7 @@ const { index, title } = Astro.props;
       }
 
       @media screen and (max-width: 480px) {
+        margin-left: 12px;
         max-width: 80px;
       }
     }

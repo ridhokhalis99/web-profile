@@ -10,8 +10,10 @@
       I'm a web developer focusing on front-end development and sometimes do
       back-end development. I'm currently working as a front-end software
       engineer at
-      <a class="link" href="https://neo.transfez.com/" target="_blank"
-        >Transfez</a
+      <a
+        class="link hover-underline"
+        href="https://neo.transfez.com/"
+        target="_blank">Transfez</a
       >.
     </p>
     <button>Check my resume</button>
@@ -68,6 +70,29 @@
 
         @media screen and (max-width: 480px) {
           line-height: 24px;
+        }
+
+        .hover-underline {
+          display: inline-block;
+          position: relative;
+        }
+
+        .hover-underline::after {
+          content: "";
+          position: absolute;
+          width: 100%;
+          transform: scaleX(0);
+          height: 0.25px;
+          bottom: 0;
+          left: 0;
+          background-color: var(--primary-color);
+          transform-origin: bottom right;
+          transition: transform 0.25s ease-out;
+        }
+
+        .hover-underline:hover::after {
+          transform: scaleX(1);
+          transform-origin: bottom left;
         }
       }
 
