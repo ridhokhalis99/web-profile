@@ -40,19 +40,39 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
 
 <style lang="scss">
   .project {
+    height: 400px;
+
+    @media screen and (max-width: 1024px) and (min-width: 481px) {
+      width: calc(100vw - 128px);
+      height: 400px;
+    }
+
+    @media screen and (max-width: 480px) {
+      height: 575px;
+      width: calc(100vw - 48px);
+    }
+
     .project-image {
       .image-overlay {
         position: absolute;
-        width: 580px;
-        height: 400px;
+        width: 100%;
+        height: 100%;
+        max-width: 580px;
         background-color: var(--primary-color);
         opacity: 0.4;
         z-index: 5;
         transition: opacity 0.2s ease-in-out;
 
-        @media screen and (max-width: 1024px) {
-          width: 100%;
+        @media screen and (max-width: 1024px) and (min-width: 481px) {
           max-width: calc(100vw - 128px);
+          height: 400px;
+          background-color: var(--dark-primary-color);
+          opacity: 0.95;
+        }
+
+        @media screen and (max-width: 480px) {
+          height: 575px;
+          max-width: calc(100vw - 48px);
           background-color: var(--dark-primary-color);
           opacity: 0.95;
         }
@@ -72,9 +92,16 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
         object-fit: cover;
         filter: grayscale(1);
 
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1024px) and (min-width: 481px) {
           width: 100%;
+          height: 400px;
           max-width: calc(100vw - 128px);
+          position: absolute;
+        }
+
+        @media screen and (max-width: 480px) {
+          height: 575px;
+          max-width: calc(100vw - 48px);
           position: absolute;
         }
       }
@@ -133,7 +160,8 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
       .tech-stack {
         margin-top: 60px;
         display: flex;
-        gap: 24px;
+        column-gap: 24px;
+        row-gap: 12px;
         flex-wrap: wrap;
 
         .tech {

@@ -7,7 +7,7 @@ import OtherProjects from "./OtherProjects.astro";
 
 <section id="projects">
   <div class="section-content">
-    <SectionHeader index={2} title="Some things i've built" />
+    <SectionHeader index={2} title="Things i've built" />
     <div class="projects-container">
       {
         projects.map((project) => (
@@ -29,17 +29,15 @@ import OtherProjects from "./OtherProjects.astro";
 <style lang="scss" is:global>
   section {
     .section-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 64px;
-      height: 100%;
-
       .projects-container {
         display: flex;
         flex-direction: column;
         gap: 92px;
         margin-top: 32px;
+
+        @media screen and (max-width: 480px) {
+          gap: 32px;
+        }
 
         .project {
           display: flex;
@@ -48,7 +46,7 @@ import OtherProjects from "./OtherProjects.astro";
         .project:nth-child(even) {
           flex-direction: row-reverse;
 
-          @media (max-width: 1024px) {
+          @media screen and (max-width: 1024px) {
             flex-direction: row;
           }
 
@@ -58,7 +56,7 @@ import OtherProjects from "./OtherProjects.astro";
             position: relative;
             left: 50px;
 
-            @media (max-width: 1024px) {
+            @media screen and (max-width: 1024px) {
               left: 0;
               align-items: flex-start;
               z-index: 5;

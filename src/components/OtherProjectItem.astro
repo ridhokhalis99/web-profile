@@ -108,15 +108,20 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
         margin-bottom: 24px;
         font-weight: 300;
 
-        @media (max-width: 768px) {
+        @media screen and (max-width: 768px) and (min-width: 481px) {
           height: 160px;
+        }
+
+        @media screen and (max-width: 480px) {
+          height: 120px;
         }
       }
 
       .tech-stack {
         display: flex;
         flex-wrap: wrap;
-        gap: 8px;
+        column-gap: 24px;
+        row-gap: 12px;
 
         .tech {
           font-family: var(--mono);

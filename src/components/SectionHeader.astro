@@ -29,6 +29,10 @@ const { index, title } = Astro.props;
     h1 {
       font-size: 32px;
       color: var(--lightest-slate);
+
+      @media screen and (max-width: 480px) {
+        font-size: 24px;
+      }
     }
 
     .line {
@@ -37,8 +41,12 @@ const { index, title } = Astro.props;
       height: 1px;
       background-color: var(--slate);
 
-      @media (max-width: 1024px) {
+      @media screen and (max-width: 1024px) and (min-height: 481px) {
         max-width: 240px;
+      }
+
+      @media screen and (max-width: 480px) {
+        max-width: 80px;
       }
     }
   }

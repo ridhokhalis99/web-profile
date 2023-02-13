@@ -49,19 +49,17 @@ const techskills = [
   section {
     height: 100vh;
 
-    .section-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 64px;
+    @media screen and (max-width: 480px) {
       height: 100%;
+    }
 
+    .section-content {
       .content-container {
         display: grid;
         grid-template-columns: 3fr 2fr;
         gap: 60px;
 
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1024px) and (min-width: 769px) {
           grid-template-columns: 3fr 2fr;
           gap: 32px;
         }
@@ -80,6 +78,10 @@ const techskills = [
             list-style: none;
             display: grid;
             grid-template-columns: repeat(3, minmax(140px, 200px));
+
+            @media screen and (max-width: 480px) {
+              grid-template-columns: repeat(2, minmax(140px, 200px));
+            }
 
             li:before {
               content: "▹";
@@ -107,6 +109,11 @@ const techskills = [
             position: relative;
             z-index: 2;
             filter: grayscale(1);
+
+            @media screen and (max-width: 480px) {
+              width: 200px;
+              height: 200px;
+            }
           }
 
           .image-overlay {
@@ -118,6 +125,11 @@ const techskills = [
             opacity: 0.4;
             z-index: 5;
             transition: opacity 0.2s ease-in-out;
+
+            @media screen and (max-width: 480px) {
+              width: 200px;
+              height: 200px;
+            }
 
             &:hover {
               opacity: 0;
@@ -143,6 +155,11 @@ const techskills = [
             margin-top: 20px;
             z-index: 1;
             transition: margin 0.2s ease-in-out;
+
+            @media screen and (max-width: 480px) {
+              width: 200px;
+              height: 200px;
+            }
           }
         }
       }
