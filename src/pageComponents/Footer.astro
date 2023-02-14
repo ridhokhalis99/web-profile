@@ -26,10 +26,14 @@ import socialLinks from "../../public/data/socialLinks";
     line-height: 24px;
 
     .social-links {
-      display: flex;
+      display: none;
       justify-content: center;
       gap: 24px;
       margin-bottom: 24px;
+
+      @media (max-width: 1024px) {
+        display: flex;
+      }
 
       a {
         width: 24px;
