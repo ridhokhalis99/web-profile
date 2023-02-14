@@ -34,42 +34,51 @@ const navLinks = [
     <title>{title}</title>
   </head>
   <body>
-    <nav>
-      <div class="navbar-container">
-        <a class="logo" href="/"
-          ><span class="logo-tag">{"<"}</span>RidhoKhalis<span class="logo-tag"
-            >{"/>"}</span
-          ></a
+    <div class="intro">
+      <h1 class="intro-logo">
+        <span class="logo-tag">{"<"}</span>RidhoKhalis<span class="logo-tag"
+          >{"/>"}</span
         >
-        <div class="navlink-container">
-          {
-            navLinks.map((navLink, index) => (
-              <a class="nav-link" href={navLink.href}>
-                <span class="nav-link-index">{`0${index + 1}.`}</span>
-                {navLink.name}
-              </a>
-            ))
-          }
-        </div>
-        <NavMenu />
-      </div>
-    </nav>
-    <slot />
-    <div class="social-container">
-      {
-        socialLinks.map((socialLink) => (
-          <a href={socialLink.href} target="_blank">
-            {<socialLink.component />}
-          </a>
-        ))
-      }
-      <div class="line"></div>
+      </h1>
     </div>
-    <div class="email-container">
-      <a href="mailto:Ridhokhalis37@gmail.com" target="_blank"
-        >Ridhokhalis37@gmail.com</a
-      >
-      <div class="line"></div>
+    <div id="root">
+      <nav>
+        <div class="navbar-container">
+          <a class="logo" href="/"
+            ><span class="logo-tag">{"<"}</span>RidhoKhalis<span
+              class="logo-tag">{"/>"}</span
+            ></a
+          >
+          <div class="navlink-container">
+            {
+              navLinks.map((navLink, index) => (
+                <a class="nav-link" href={navLink.href}>
+                  <span class="nav-link-index">{`0${index + 1}.`}</span>
+                  {navLink.name}
+                </a>
+              ))
+            }
+          </div>
+          <NavMenu />
+        </div>
+      </nav>
+      <slot />
+      <div class="social-container">
+        {
+          socialLinks.map((socialLink) => (
+            <a href={socialLink.href} target="_blank">
+              {<socialLink.component />}
+            </a>
+          ))
+        }
+        <div class="line"></div>
+      </div>
+      <div class="email-container">
+        <a href="mailto:Ridhokhalis37@gmail.com" target="_blank"
+          >Ridhokhalis37@gmail.com</a
+        >
+        <div class="line"></div>
+      </div>
     </div>
   </body>
 
@@ -138,10 +147,90 @@ const navLinks = [
 
     body {
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     body.open {
       overflow: hidden;
+    }
+
+    #root {
+      opacity: 0;
+    }
+
+    #root.loaded {
+      opacity: 1;
+      transition: opacity 0.5s ease-out;
+    }
+
+    .intro {
+      position: absolute;
+      display: grid;
+      place-items: center;
+      height: 100vh;
+      width: 100vw;
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+      }
+
+      @keyframes blink {
+        50% {
+          border-color: transparent;
+        }
+      }
+
+      @keyframes hide {
+        from {
+          height: 1ch;
+          background-color: white;
+        }
+        to {
+          height: 0;
+          width: 100%;
+        }
+      }
+
+      .intro-logo {
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: var(--primary-color);
+        font-family: var(--mono);
+        background-color: var(--dark-primary-color);
+
+        animation: typing 2s steps(14), blink 0.5s step-end infinite alternate,
+          hide 0.5s ease-out 2s;
+
+        width: 15ch;
+        white-space: nowrap;
+        overflow: hidden;
+        border-right: 3px solid;
+        font-family: monospace;
+
+        @media screen and (max-width: 1024px) and (min-width: 481px) {
+          font-size: 20px;
+        }
+
+        @media screen and (max-width: 480px) {
+          font-size: 18px;
+        }
+
+        .logo-tag {
+          color: var(--white);
+        }
+      }
+
+      .intro-logo.loaded {
+        display: none;
+      }
+    }
+
+    .intro.loaded {
+      opacity: 0;
+      transition: opacity 4s ease-out;
     }
 
     section {
@@ -160,7 +249,7 @@ const navLinks = [
         padding: 0 64px;
         height: 100%;
         margin: auto;
-        max-width: 1360px;
+        max-width: 1024px;
 
         @media screen and (max-width: 480px) {
           padding: 24px 24px;
@@ -392,6 +481,18 @@ const navLinks = [
       }
 
       prevScrollPos = scrollPos;
+    });
+
+    const root = document.getElementById("root") as HTMLElement;
+    const introLogo = document.querySelector(".intro-logo") as HTMLElement;
+
+    document.addEventListener("DOMContentLoaded", function () {
+      setTimeout(() => {
+        introLogo.classList.add("loaded");
+      }, 2300);
+      setTimeout(() => {
+        root.classList.add("loaded");
+      }, 3000);
     });
   </script>
 </html>
