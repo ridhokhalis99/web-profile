@@ -136,7 +136,7 @@ const navLinks = [
 
       @media screen and (max-width: 480px) {
         padding: 12px 16px;
-        font-size: 14px;
+        font-size: 12px;
       }
 
       &:hover {
@@ -156,7 +156,8 @@ const navLinks = [
     body.loaded {
       height: 100%;
       width: 100%;
-      overflow: auto;
+      overflow-y: auto;
+      overflow-x: hidden;
     }
 
     body.open {
@@ -164,12 +165,17 @@ const navLinks = [
     }
 
     #root {
+      display: none;
+    }
+
+    #root.visible {
+      display: block;
       opacity: 0;
     }
 
     #root.loaded {
       opacity: 1;
-      transition: opacity 0.5s ease-out;
+      transition: opacity 0.3s ease-in-out;
     }
 
     .intro {
@@ -257,7 +263,7 @@ const navLinks = [
         max-width: 1024px;
 
         @media screen and (max-width: 480px) {
-          padding: 24px 24px;
+          padding: 16px 24px;
         }
       }
     }
@@ -513,6 +519,9 @@ const navLinks = [
       setTimeout(() => {
         introLogo.classList.add("loaded");
       }, 3300);
+      setTimeout(() => {
+        root.classList.add("visible");
+      }, 3500);
       setTimeout(() => {
         root.classList.add("loaded");
         body.classList.add("loaded");

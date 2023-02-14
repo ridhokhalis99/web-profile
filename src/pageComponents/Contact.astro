@@ -24,12 +24,20 @@
       text-align: center;
       .section-title {
         font-size: 16px;
+
+        @media screen and (max-width: 480px) {
+          font-size: 14px;
+        }
       }
 
       .section-header {
         font-size: 48px;
         color: var(--lightest-slate);
         margin-bottom: 16px;
+
+        @media screen and (max-width: 480px) {
+          font-size: 32px;
+        }
       }
 
       .section-description {

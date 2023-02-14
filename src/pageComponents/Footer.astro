@@ -40,6 +40,10 @@ import socialLinks from "../../public/data/socialLinks";
         color: var(--lightest-slate);
         transition: all 0.3s ease-in-out;
 
+        @media screen and (max-width: 480px) {
+          width: 20px;
+        }
+
         &:hover {
           color: var(--primary-color);
           transform: translateY(-8px);
