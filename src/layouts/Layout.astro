@@ -107,8 +107,8 @@ const navLinks = [
 
     html {
       font-family: "Poppins", system-ui, sans-serif;
-      background-color: var(--navy);
       scroll-behavior: smooth;
+      background-color: var(--navy);
     }
 
     a {
@@ -148,6 +148,15 @@ const navLinks = [
     body {
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+    }
+
+    body.loaded {
+      height: 100%;
+      width: 100%;
+      overflow: auto;
     }
 
     body.open {
@@ -169,6 +178,7 @@ const navLinks = [
       place-items: center;
       height: 100vh;
       width: 100vw;
+      background-color: var(--dark-navy);
 
       @keyframes typing {
         from {
@@ -202,7 +212,7 @@ const navLinks = [
         background-color: var(--dark-primary-color);
 
         animation: typing 2s steps(14), blink 0.5s step-end infinite alternate,
-          hide 0.5s ease-out 2s;
+          hide 0.5s ease-out 3s;
 
         width: 15ch;
         white-space: nowrap;
@@ -226,11 +236,6 @@ const navLinks = [
       .intro-logo.loaded {
         display: none;
       }
-    }
-
-    .intro.loaded {
-      opacity: 0;
-      transition: opacity 4s ease-out;
     }
 
     section {
@@ -465,6 +470,23 @@ const navLinks = [
       font-family: var(--mono);
       color: var(--primary-color);
     }
+
+    .hidden {
+      opacity: 0;
+      transform: translateX(-100%);
+      transition: all 0.75s ease-in-out;
+      filter: blur(5px);
+
+      @media (prefers-reduced-motion) {
+        transition: none;
+      }
+    }
+
+    .show {
+      opacity: 1;
+      filter: blur(0);
+      transform: translateX(0);
+    }
   </style>
 
   <script>
@@ -485,14 +507,29 @@ const navLinks = [
 
     const root = document.getElementById("root") as HTMLElement;
     const introLogo = document.querySelector(".intro-logo") as HTMLElement;
+    const body = document.querySelector("body") as HTMLElement;
 
     document.addEventListener("DOMContentLoaded", function () {
       setTimeout(() => {
         introLogo.classList.add("loaded");
-      }, 2300);
+      }, 3300);
       setTimeout(() => {
         root.classList.add("loaded");
-      }, 3000);
+        body.classList.add("loaded");
+      }, 4000);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    });
+
+    const hiddenElements = document.querySelectorAll(".hidden");
+    hiddenElements.forEach((element) => {
+      observer.observe(element);
     });
   </script>
 </html>
