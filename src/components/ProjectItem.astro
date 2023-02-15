@@ -22,7 +22,7 @@ const { imageSrc, title, description, techStack, githubLink, liveLink } =
   </div>
   <div class="project-content">
     <h3 class="primary-mono">Featured Project</h3>
-    <a class="project-title">{title}</a>
+    <a class="project-title" href={liveLink} target="_blank">{title}</a>
     <p class="project-description">{description}</p>
     <div class="tech-stack">
       {techStack.map((tech) => <span class="tech">{tech}</span>)}
