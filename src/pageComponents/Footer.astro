@@ -12,8 +12,10 @@ import socialLinks from "../../public/data/socialLinks";
       ))
     }
   </div>
-  <p>Built by Ridho Khalis</p>
-  <p>Designed by Brittany Chiang</p>
+  <div class="attribution">
+    <p>Built by Ridho Khalis</p>
+    <p>Designed by Brittany Chiang</p>
+  </div>
 </footer>
 
 <style lang="scss">
@@ -47,6 +49,13 @@ import socialLinks from "../../public/data/socialLinks";
         &:hover {
           color: var(--primary-color);
           transform: translateY(-8px);
+        }
+      }
+    }
+    .attribution {
+      p {
+        @media (max-width: 480px) {
+          font-size: 12px;
         }
       }
     }
