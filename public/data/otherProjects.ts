@@ -21,11 +21,11 @@ const otherProjects = [
     githubLink: "https://github.com/ridhokhalis99/colorsrc.git",
   },
   {
-    title: "Calculator",
-    description: "A web app that can perform basic arithmetic operations.",
-    techStack: ["Javascript", "CSS", "HTML"],
-    githubLink: "https://github.com/ridhokhalis99/calculator",
-    liveLink: "https://ridhokhalis99.github.io/calculator/",
+    title: "BMI Calculator",
+    description:
+      "A Flutter based mobile app to calculate BMI based on user's weight, height, age, and gender.",
+    techStack: ["Flutter"],
+    githubLink: "https://github.com/ridhokhalis99/bmi-calculator",
   },
   {
     title: "Typemaster",
