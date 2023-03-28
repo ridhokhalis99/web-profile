@@ -1,6 +1,7 @@
 import Github from "../../src/icons/Github.astro";
 import Linkedin from "../../src/icons/Linkedin.astro";
 import Instagram from "../../src/icons/Instagram.astro";
+import Medium from "../../src/icons/Medium.astro";
 
 const socialLinks = [
   {
@@ -17,6 +18,11 @@ const socialLinks = [
     name: "Instagram",
     href: "https://www.instagram.com/ridho_khalis/",
     component: Instagram,
+  },
+  {
+    name: "Medium",
+    href: "https://medium.com/@ridhokhalis37/",
+    component: Medium,
   },
 ];
 
