@@ -33,6 +33,21 @@ const navLinks = [
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    type="text/partytown"
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-4BZ8M3LS6R"
+  ></script>
+  <script type="text/partytown">
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-4BZ8M3LS6R");
+  </script>
   <body>
     <div class="intro">
       <h1 class="intro-logo">
