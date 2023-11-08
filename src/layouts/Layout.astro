@@ -532,6 +532,16 @@ const navLinks = [
     const body = document.querySelector("body") as HTMLElement;
 
     document.addEventListener("DOMContentLoaded", function () {
+      const lastSeenIntro = localStorage.getItem("lastSeenIntro") || "0";
+      const ONE_DAY = 86400000;
+      const isNotShowIntro = JSON.parse(lastSeenIntro) > Date.now() - ONE_DAY;
+      if (isNotShowIntro) {
+        introLogo.classList.add("loaded");
+        root.classList.add("visible");
+        root.classList.add("loaded");
+        body.classList.add("loaded");
+        return;
+      }
       setTimeout(() => {
         introLogo.classList.add("loaded");
       }, 3300);
@@ -542,6 +552,7 @@ const navLinks = [
         root.classList.add("loaded");
         body.classList.add("loaded");
       }, 4000);
+      localStorage.setItem("lastSeenIntro", JSON.stringify(Date.now()));
     });
 
     const observer = new IntersectionObserver((entries) => {
