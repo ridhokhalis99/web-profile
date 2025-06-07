@@ -21,7 +21,7 @@ const socialLinks = [
   },
   {
     name: "Medium",
-    href: "https://medium.com/@ridhokhalis37/",
+    href: "https://medium.com/@ridhokhalis",
     component: Medium,
   },
 ];
