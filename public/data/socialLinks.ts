@@ -17,7 +17,7 @@ const socialLinks = [
   },
   {
     name: "Instagram",
-    href: "https://www.instagram.com/ridho_khalis/",
+    href: "https://www.instagram.com/ridhobahastech/",
     component: Instagram,
   },
   {
@@ -27,7 +27,7 @@ const socialLinks = [
   },
   {
     name: "Tiktok",
-    href: "https://www.tiktok.com/@heyitsridho",
+    href: "https://www.tiktok.com/@ridhobahastech",
     component: Tiktok,
   },
 ];
