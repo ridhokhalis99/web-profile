@@ -2,15 +2,15 @@
 import SectionHeader from "../components/SectionHeader.astro";
 
 const techskills = [
-  "Javascript",
-  "Typescript",
-  "React",
-  "Next.js",
-  "Ruby",
-  "Rails",
-  "Node.js",
-  "NestJS",
-  "Express",
+  "Ruby on Rails",
+  "Go",
+  "Java Spring Boot",
+  "PostgreSQL",
+  "ClickHouse",
+  "Kafka",
+  "AWS",
+  "Docker",
+  "Kubernetes",
 ];
 ---
 
@@ -20,24 +20,28 @@ const techskills = [
     <div class="content-container">
       <div class="text-container">
         <p>
-          Hello! My name is <span class="primary-mono">Ridho Khalis</span> and I'm
-          a software engineer with a strong enthusiasm for shaping engaging digital
-          solutions. As a full-stack developer, I leverage my meticulous attention
-          to detail and my broad technical skills to create visually appealing, user-friendly
-          websites and applications.
+          My primary work focuses on building backend systems using
+          <span class="primary-mono"> Ruby on Rails</span>, where I design and
+          implement reliable services.
         </p>
+
         <p>
-          Currently, my main focus lies in advancing my expertise and
-          proficiency in full-stack development, aiming to deliver exceptional
-          and user-centered digital experiences.
+          I work on backend architectures focused on reliability, data
+          consistency, and observability in production environments. I am an <strong
+            >AWS Certified Solutions Architect – Associate (SAA-C03)</strong
+          > with a strong interest in backend system design and cloud-based infrastructure.
         </p>
+
         <p>
-          Here are a few technologies I've been actively engaging with recently:
+          Here are some of the technologies I’ve been actively working with
+          recently:
         </p>
+
         <ul>
           {techskills.map((skill) => <li>{skill}</li>)}
         </ul>
       </div>
+
       <div class="image-container">
         <div class="image-overlay"></div>
         <img src="/assets/images/profile.jpeg" alt="profile image" />
@@ -74,7 +78,7 @@ const techskills = [
         .text-container {
           display: flex;
           flex-direction: column;
-          gap: 24px;
+          gap: 20px;
 
           ul {
             list-style: none;
@@ -91,10 +95,6 @@ const techskills = [
               color: var(--primary-color);
               line-height: 12px;
             }
-          }
-
-          .primary-mono {
-            letter-spacing: 0;
           }
         }
 
