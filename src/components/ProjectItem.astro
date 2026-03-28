@@ -1,9 +1,7 @@
 ---
-import ExternalLink from "../icons/ExternalLink.astro";
 import Github from "../icons/Github.astro";
 
 export interface Props {
-  imageSrc: string;
   title: string;
   description: string;
   techStack: string[];
@@ -11,181 +9,153 @@ export interface Props {
   liveLink?: string;
 }
 
-const { imageSrc, title, description, techStack, githubLink, liveLink } =
-  Astro.props;
+const { title, description, techStack, githubLink, liveLink } = Astro.props;
 ---
 
 <div class="project">
-  <div class="project-image">
-    <div class="image-overlay"></div>
-    <img src={imageSrc} alt={title} />
-  </div>
-  <div class="project-content">
+  <div class="project-header">
     <h3 class="primary-mono">Featured Project</h3>
-    <a class="project-title" href={liveLink} target="_blank">{title}</a>
-    <p class="project-description">{description}</p>
-    <div class="tech-stack">
-      {techStack.map((tech) => <span class="tech">{tech}</span>)}
-    </div>
     <div class="project-links">
-      <a href={githubLink} target="_blank">
+      <a href={githubLink} target="_blank" aria-label="View source on GitHub">
         <Github />
       </a>
-      <a href={liveLink} target="_blank">
-        <ExternalLink />
-      </a>
+    </div>
+  </div>
+  <a class="project-title" href={liveLink ?? githubLink} target="_blank"
+    >{title}</a
+  >
+  <p class="project-description">{description}</p>
+  <div class="project-footer">
+    <div class="tech-stack">
+      {techStack.map((tech) => <span class="tech">{tech}</span>)}
     </div>
   </div>
 </div>
 
 <style lang="scss">
   .project {
-    height: 400px;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    border-radius: 16px;
+    padding: 48px;
+    background: linear-gradient(
+        135deg,
+        rgba(17, 34, 64, 0.95),
+        rgba(17, 34, 64, 0.8)
+      )
+      var(--light-navy);
+    box-shadow: 0 15px 40px -20px var(--navy-shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    transition: border-color 0.3s ease, transform 0.3s ease,
+      box-shadow 0.3s ease;
 
-    @media screen and (max-width: 1024px) and (min-width: 481px) {
-      width: calc(100vw - 128px);
-      height: 400px;
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(100, 255, 218, 0.15),
+        transparent 60%
+      );
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+
+    &:hover,
+    &:focus-within {
+      border-color: var(--primary-color);
+      transform: translateY(-6px);
+      box-shadow: 0 25px 45px -25px var(--navy-shadow);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+
+    @media screen and (max-width: 1024px) {
+      padding: 40px;
     }
 
     @media screen and (max-width: 480px) {
-      height: 575px;
-      width: calc(100vw - 48px);
+      padding: 28px;
     }
 
-    .project-image {
-      .image-overlay {
-        position: absolute;
-        width: 100%;
-        height: 400px;
-        max-width: 580px;
-        background-color: var(--primary-color);
-        opacity: 0.4;
-        z-index: 5;
-        transition: opacity 0.2s ease-in-out;
-
-        @media screen and (max-width: 1024px) and (min-width: 481px) {
-          max-width: calc(100vw - 128px);
-          background-color: var(--dark-primary-color);
-          opacity: 0.95;
-        }
-
-        @media screen and (max-width: 480px) {
-          height: 575px;
-          max-width: calc(100vw - 48px);
-          background-color: var(--dark-primary-color);
-          opacity: 0.95;
-        }
-
-        &:hover {
-          opacity: 0;
-
-          & + img {
-            filter: none;
-          }
-        }
-      }
-
-      img {
-        width: 580px;
-        height: 400px;
-        object-fit: cover;
-        filter: grayscale(1);
-
-        @media screen and (max-width: 1024px) and (min-width: 481px) {
-          width: 100%;
-          height: 400px;
-          max-width: calc(100vw - 128px);
-          position: absolute;
-        }
-
-        @media screen and (max-width: 480px) {
-          height: 575px;
-          max-width: calc(100vw - 48px);
-          position: absolute;
-        }
-      }
-    }
-
-    .project-content {
-      width: 100%;
+    .project-header {
       display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      justify-content: center;
-      position: relative;
-      right: 50px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
 
-      @media screen and (max-width: 1024px) {
-        left: 0;
-        align-items: flex-start;
-        z-index: 5;
-        padding: 64px 32px;
+      h3 {
+        letter-spacing: 0.08em;
       }
+    }
 
-      .project-title {
+    .project-title {
+      color: var(--lightest-slate);
+      font-size: clamp(26px, 4vw, 32px);
+      font-weight: 600;
+      line-height: 1.2;
+      transition: color 0.3s ease;
+
+      &:hover,
+      &:focus-visible {
+        color: var(--primary-color);
+      }
+    }
+
+    .project-description {
+      color: var(--slate);
+      text-align: left;
+      line-height: 1.6;
+    }
+
+    .project-footer {
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .tech-stack {
+      display: flex;
+      column-gap: 16px;
+      row-gap: 12px;
+      flex-wrap: wrap;
+
+      .tech {
+        font-family: var(--mono);
+        font-size: 13px;
+        color: var(--light-slate);
+        background-color: rgba(148, 163, 184, 0.08);
+        padding: 6px 12px;
+        border-radius: 999px;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+      }
+    }
+
+    .project-links {
+      display: flex;
+      align-items: center;
+
+      a {
         color: var(--lightest-slate);
-        margin-top: 8px;
-        font-size: 24px;
-        font-weight: 700;
         transition: all 0.3s ease-in-out;
-        cursor: pointer;
+        width: 28px;
 
         &:hover {
           color: var(--primary-color);
-        }
-      }
-
-      .project-description {
-        color: var(--slate);
-        text-align: right;
-        padding: 24px;
-        width: 480px;
-        background-color: var(--light-navy);
-        position: relative;
-        top: 32px;
-        right: 0px;
-        z-index: 5;
-        box-shadow: 0 10px 30px -15px var(--navy-shadow);
-
-        @media screen and (max-width: 1024px) {
-          width: 100%;
-          background-color: transparent;
-          box-shadow: none;
-          padding: 0;
-          text-align: left;
-        }
-      }
-
-      .tech-stack {
-        margin-top: 60px;
-        display: flex;
-        column-gap: 24px;
-        row-gap: 12px;
-        flex-wrap: wrap;
-
-        .tech {
-          font-family: var(--mono);
-          font-size: 14px;
-        }
-      }
-
-      .project-links {
-        width: 100px;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        align-items: center;
-        gap: 16px;
-        margin-top: 32px;
-
-        a {
-          color: var(--lightest-slate);
-          transition: all 0.3s ease-in-out;
-          width: 24px;
-
-          &:hover {
-            color: var(--primary-color);
-            transform: translateY(-8px);
-          }
+          transform: translateY(-4px);
         }
       }
     }

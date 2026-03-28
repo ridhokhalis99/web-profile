@@ -12,7 +12,6 @@ import OtherProjects from "./OtherProjects.astro";
       {
         projects.map((project) => (
           <ProjectItem
-            imageSrc={project.imageSrc}
             title={project.title}
             description={project.description}
             techStack={project.techStack}
@@ -34,41 +33,12 @@ import OtherProjects from "./OtherProjects.astro";
         flex-direction: column;
         gap: 92px;
         margin-top: 32px;
+        width: 100%;
 
         @media screen and (max-width: 480px) {
           gap: 32px;
         }
 
-        .project {
-          display: flex;
-        }
-
-        .project:nth-child(even) {
-          flex-direction: row-reverse;
-
-          @media screen and (max-width: 1024px) {
-            flex-direction: row;
-          }
-
-          .project-content {
-            align-items: flex-start;
-            padding-left: 0;
-            position: relative;
-            left: 50px;
-
-            @media screen and (max-width: 1024px) {
-              left: 0;
-              align-items: flex-start;
-              z-index: 5;
-              padding: 64px 32px;
-            }
-
-            .project-description {
-              left: 0;
-              text-align: left;
-            }
-          }
-        }
       }
     }
   }
