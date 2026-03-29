@@ -3,27 +3,21 @@ import SectionHeader from "../components/SectionHeader.astro";
 import contentFeeds from "../../public/data/contentFeeds";
 type Platform = "linkedin" | "medium" | "tiktok";
 
-const platformMeta: Record<
-  Platform,
-  { label: string; badge: string; cta: string; fallback: string }
-> = {
+const platformMeta: Record<Platform, { label: string; badge: string; cta: string }> = {
   linkedin: {
     label: "LinkedIn",
     badge: "Update",
     cta: "View on LinkedIn",
-    fallback: "Latest insight on engineering leadership and backend design.",
   },
   medium: {
     label: "Medium",
     badge: "Article",
     cta: "Read on Medium",
-    fallback: "",
   },
   tiktok: {
     label: "TikTok",
     badge: "Video",
     cta: "Watch on TikTok",
-    fallback: "Short video covering backend/devops workflows.",
   },
 };
 
@@ -40,8 +34,7 @@ const truncate = (text: string, limit = 160) =>
   text.length > limit ? `${text.slice(0, limit).trimEnd()}...` : text;
 
 const getDescription = (item: (typeof gridItems)[number]) => {
-  const base = item.description || item.fallback || "";
-  return base ? truncate(base) : "";
+  return item.description ? truncate(item.description) : "";
 };
 
 ---
