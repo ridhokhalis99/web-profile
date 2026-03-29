@@ -3,7 +3,10 @@ import SectionHeader from "../components/SectionHeader.astro";
 import contentFeeds from "../../public/data/contentFeeds";
 type Platform = "linkedin" | "medium" | "tiktok";
 
-const platformMeta: Record<Platform, { label: string; badge: string; cta: string }> = {
+const platformMeta: Record<
+  Platform,
+  { label: string; badge: string; cta: string }
+> = {
   linkedin: {
     label: "LinkedIn",
     badge: "Update",
@@ -27,7 +30,7 @@ const gridItems = (Object.keys(contentFeeds) as Platform[]).flatMap(
       ...item,
       platform,
       ...platformMeta[platform],
-    }))
+    })),
 );
 
 const truncate = (text: string, limit = 160) =>
@@ -36,7 +39,6 @@ const truncate = (text: string, limit = 160) =>
 const getDescription = (item: (typeof gridItems)[number]) => {
   return item.description ? truncate(item.description) : "";
 };
-
 ---
 
 <section class="hidden" id="content">
