@@ -11,13 +11,7 @@ import OtherProjects from "./OtherProjects.astro";
     <div class="projects-container">
       {
         projects.map((project) => (
-          <ProjectItem
-            title={project.title}
-            description={project.description}
-            techStack={project.techStack}
-            githubLink={project.githubLink}
-            liveLink={project.liveLink}
-          />
+          <ProjectItem {...project} />
         ))
       }
     </div>

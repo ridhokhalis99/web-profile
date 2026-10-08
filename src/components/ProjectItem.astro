@@ -1,29 +1,48 @@
 ---
+import ExternalLink from "../icons/ExternalLink.astro";
 import Github from "../icons/Github.astro";
 
 export interface Props {
   title: string;
   description: string;
   techStack: string[];
-  githubLink: string;
+  githubLink?: string;
   liveLink?: string;
 }
 
 const { title, description, techStack, githubLink, liveLink } = Astro.props;
+const titleLink = liveLink ?? githubLink;
 ---
 
 <div class="project">
   <div class="project-header">
     <h3 class="primary-mono">Featured Project</h3>
-    <div class="project-links">
-      <a href={githubLink} target="_blank" aria-label="View source on GitHub">
-        <Github />
-      </a>
-    </div>
+    {
+      titleLink && (
+        <div class="project-links">
+          {githubLink && (
+            <a href={githubLink} target="_blank" aria-label="View source on GitHub">
+              <Github />
+            </a>
+          )}
+          {liveLink && (
+            <a href={liveLink} target="_blank" aria-label="Open live site">
+              <ExternalLink />
+            </a>
+          )}
+        </div>
+      )
+    }
   </div>
-  <a class="project-title" href={liveLink ?? githubLink} target="_blank"
-    >{title}</a
-  >
+  {
+    titleLink ? (
+      <a class="project-title" href={titleLink} target="_blank">
+        {title}
+      </a>
+    ) : (
+      <span class="project-title">{title}</span>
+    )
+  }
   <p class="project-description">{description}</p>
   <div class="project-footer">
     <div class="tech-stack">
@@ -147,6 +166,7 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
     .project-links {
       display: flex;
       align-items: center;
+      gap: 16px;
 
       a {
         color: var(--lightest-slate);
