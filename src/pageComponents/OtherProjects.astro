@@ -1,7 +1,7 @@
 ---
 import OtherProjectItem from "../components/OtherProjectItem.astro";
 import Projects from "./Projects.astro";
-import otherProjects from "../../public/data/otherProjects";
+import otherProjects from "../data/otherProjects";
 ---
 
 <section>
@@ -10,20 +10,15 @@ import otherProjects from "../../public/data/otherProjects";
     <div class="other-projects-container">
       {
         otherProjects.map((project) => (
-          <OtherProjectItem
-            title={project.title}
-            description={project.description}
-            techStack={project.techStack}
-            githubLink={project.githubLink}
-            liveLink={project.liveLink}
-          />
+          <OtherProjectItem {...project} />
         ))
       }
     </div>
     <a
       class="cta more-button"
       href="https://github.com/ridhokhalis99?tab=repositories"
-      target="_blank">See more</a
+      target="_blank"
+      rel="noopener noreferrer">See more on GitHub</a
     >
   </div>
 </section>

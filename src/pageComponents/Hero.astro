@@ -1,4 +1,8 @@
 ---
+const CAREER_START = new Date("2022-07-01");
+const yearsOfExperience = Math.floor(
+  (Date.now() - CAREER_START.getTime()) / (365.25 * 24 * 60 * 60 * 1000),
+);
 ---
 
 <section class="hidden">
@@ -7,23 +11,27 @@
     <h1 class="name">Ridho Khalis.</h1>
     <p class="profession">I'm a Software Engineer.</p>
     <p class="introduction">
-      With over 4 years of experience, I specialize in building reliable,
-      scalable software solutions. I'm currently a Software Engineer at
+      With over {yearsOfExperience} years of experience, I specialize in
+      building reliable, scalable software solutions. I'm currently a Software
+      Engineer at{" "}
       <a
         class="link hover-underline"
         href="https://www.transfez.com/"
-        target="_blank">Transfez</a
-      > and also lead custom development projects through
+        target="_blank"
+        rel="noopener noreferrer">Transfez</a
+      > and also lead custom development projects through{" "}
       <a
         class="link hover-underline"
         href="https://erkabased.com?utm_source=ridhokhalis.com&utm_medium=referral&utm_campaign=personal_brand"
-        target="_blank">Erkabased</a
+        target="_blank"
+        rel="noopener noreferrer">Erkabased</a
       >.
     </p>
     <a
       class="cta"
-      href="https://drive.google.com/file/d/1dwe5l1Eg1Og_a3z3LNIEx-izkbHKXbmG/view?usp=sharing"
-      target="_blank">Check my resume</a
+      href="/resume.pdf"
+      target="_blank"
+      rel="noopener">Check my resume</a
     >
   </div>
 </section>

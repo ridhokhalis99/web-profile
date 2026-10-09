@@ -1,4 +1,4 @@
-<button id="nav-icon">
+<button id="nav-icon" aria-label="Toggle navigation" aria-expanded="false">
   <span class="line-nav-icon"></span>
   <span class="line-nav-icon"></span>
   <span class="line-nav-icon"></span>
@@ -126,20 +126,20 @@
   const main = document.querySelector("main") as HTMLDivElement;
   const body = document.querySelector("body") as HTMLBodyElement;
 
+  const setOpen = (open: boolean) => {
+    navIcon.classList.toggle("open", open);
+    navLinkContainer.classList.toggle("open", open);
+    main.classList.toggle("open", open);
+    body.classList.toggle("open", open);
+    navIcon.setAttribute("aria-expanded", String(open));
+  };
+
   navIcon.addEventListener("click", () => {
-    navIcon.classList.toggle("open");
-    navLinkContainer.classList.toggle("open");
-    main.classList.toggle("open");
-    body.classList.toggle("open");
+    setOpen(!navIcon.classList.contains("open"));
   });
 
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 1024) {
-      navIcon.classList.remove("open");
-      navLinkContainer.classList.remove("open");
-      main.classList.remove("open");
-      body.classList.remove("open");
-    }
+    if (window.innerWidth > 1024) setOpen(false);
   });
 
   body.addEventListener("click", (e) => {
@@ -148,10 +148,7 @@
       e.target !== navLinkContainer &&
       !lineNavIcons.includes(e.target as HTMLSpanElement)
     ) {
-      navIcon.classList.remove("open");
-      navLinkContainer.classList.remove("open");
-      main.classList.remove("open");
-      body.classList.remove("open");
+      setOpen(false);
     }
   });
 </script>

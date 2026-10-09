@@ -20,12 +20,22 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
       <Folder />
     </div>
     <div class="project-links">
-      <a href={githubLink} target="_blank">
+      <a
+        href={githubLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="View source on GitHub"
+      >
         <Github />
       </a>
       {
         liveLink && (
-          <a href={liveLink} target="_blank">
+          <a
+            href={liveLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Open live site"
+          >
             <ExternalLink />
           </a>
         )
@@ -36,7 +46,8 @@ const { title, description, techStack, githubLink, liveLink } = Astro.props;
     <a
       class="project-title"
       href={liveLink ? liveLink : githubLink}
-      target="_blank">{title}</a
+      target="_blank"
+      rel="noopener noreferrer">{title}</a
     >
     <p class="project-description">{description}</p>
     <div class="tech-stack">

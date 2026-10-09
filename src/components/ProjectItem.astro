@@ -16,17 +16,27 @@ const titleLink = liveLink ?? githubLink;
 
 <div class="project">
   <div class="project-header">
-    <h3 class="primary-mono">Featured Project</h3>
+    <p class="primary-mono">Featured Project</p>
     {
       titleLink && (
         <div class="project-links">
           {githubLink && (
-            <a href={githubLink} target="_blank" aria-label="View source on GitHub">
+            <a
+              href={githubLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View source on GitHub"
+            >
               <Github />
             </a>
           )}
           {liveLink && (
-            <a href={liveLink} target="_blank" aria-label="Open live site">
+            <a
+              href={liveLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Open live site"
+            >
               <ExternalLink />
             </a>
           )}
@@ -34,15 +44,17 @@ const titleLink = liveLink ?? githubLink;
       )
     }
   </div>
-  {
-    titleLink ? (
-      <a class="project-title" href={titleLink} target="_blank">
-        {title}
-      </a>
-    ) : (
-      <span class="project-title">{title}</span>
-    )
-  }
+  <h3 class="project-title">
+    {
+      titleLink ? (
+        <a href={titleLink} target="_blank" rel="noopener noreferrer">
+          {title}
+        </a>
+      ) : (
+        title
+      )
+    }
+  </h3>
   <p class="project-description">{description}</p>
   <div class="project-footer">
     <div class="tech-stack">
@@ -114,7 +126,7 @@ const titleLink = liveLink ?? githubLink;
       justify-content: space-between;
       gap: 16px;
 
-      h3 {
+      p {
         letter-spacing: 0.08em;
       }
     }
@@ -124,11 +136,15 @@ const titleLink = liveLink ?? githubLink;
       font-size: clamp(26px, 4vw, 32px);
       font-weight: 600;
       line-height: 1.2;
-      transition: color 0.3s ease;
 
-      &:hover,
-      &:focus-visible {
-        color: var(--primary-color);
+      a {
+        color: inherit;
+        transition: color 0.3s ease;
+
+        &:hover,
+        &:focus-visible {
+          color: var(--primary-color);
+        }
       }
     }
 

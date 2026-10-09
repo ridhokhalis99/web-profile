@@ -1,12 +1,29 @@
 ---
-import socialLinks from "../../public/data/socialLinks";
-export interface Props {
-  title: string;
-}
-
+import socialLinks from "../data/socialLinks";
 import NavMenu from "../components/NavMenu.astro";
 
-const { title } = Astro.props;
+export interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = "Ridho Khalis is a software engineer building reliable backend systems and full-stack products. Software Engineer at Transfez and founder of Erkabased.",
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL("/assets/images/profile.webp", Astro.site);
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Ridho Khalis",
+  url: Astro.site?.href,
+  image: ogImage.href,
+  jobTitle: "Software Engineer",
+  worksFor: { "@type": "Organization", name: "Transfez" },
+  sameAs: socialLinks.map((link) => link.href),
+};
 
 const navLinks = [
   {
@@ -32,45 +49,93 @@ const navLinks = [
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#0b192f" />
     <title>{title}</title>
-  </head>
-  <!-- Google tag (gtag.js) -->
-  <script
-    type="text/partytown"
-    async
-    src="https://www.googletagmanager.com/gtag/js?id=G-4BZ8M3LS6R"
-  ></script>
-  <script type="text/partytown">
-    window.dataLayer = window.dataLayer || [];
-    function gtag() {
-      dataLayer.push(arguments);
-    }
-    gtag("js", new Date());
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Ridho Khalis" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="800" />
+    <meta property="og:image:height" content="800" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap"
+      />
+    </noscript>
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <!-- Google tag (gtag.js) -->
+    <script
+      type="text/partytown"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-4BZ8M3LS6R"
+    ></script>
+    <script type="text/partytown">
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-    gtag("config", "G-4BZ8M3LS6R");
-  </script>
+      gtag("config", "G-4BZ8M3LS6R");
+    </script>
+  </head>
   <body>
-    <div class="intro">
-      <h1 class="intro-logo">
+    <div class="intro" aria-hidden="true">
+      <div class="intro-logo">
         <span class="logo-tag">{"<"}</span>RidhoKhalis<span class="logo-tag"
           >{"/>"}</span
         >
-      </h1>
+      </div>
     </div>
+    <script is:inline>
+      (function () {
+        var intro = document.querySelector(".intro");
+        var ONE_DAY = 86400000;
+        var seen = Number(localStorage.getItem("lastSeenIntro")) || 0;
+        var skip =
+          matchMedia("(prefers-reduced-motion: reduce)").matches ||
+          seen > Date.now() - ONE_DAY;
+        if (skip) {
+          intro.classList.add("done");
+          return;
+        }
+        localStorage.setItem("lastSeenIntro", String(Date.now()));
+        setTimeout(function () {
+          intro.classList.add("done");
+        }, 1800);
+      })();
+    </script>
     <div id="root">
-      <nav>
+      <nav aria-label="Main">
         <div class="navbar-container">
-          <a class="logo" href="/">
-            <img src="/logo.svg" alt="logo" />
+          <a class="logo" href="/" aria-label="Ridho Khalis home">
+            <img src="/logo.svg" alt="" width="40" height="40" />
           </a>
           <div class="navlink-container">
             {
               navLinks.map((navLink, index) => (
                 <a class="nav-link" href={navLink.href}>
-                  <span class="nav-link-index">{`0${index + 1}.`}</span>
+                  <span class="nav-link-index">{`0${index + 1}.`}</span>{" "}
                   {navLink.name}
                 </a>
               ))
@@ -83,7 +148,12 @@ const navLinks = [
       <div class="social-container">
         {
           socialLinks.map((socialLink) => (
-            <a href={socialLink.href} target="_blank">
+            <a
+              href={socialLink.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={socialLink.name}
+            >
               {<socialLink.component />}
             </a>
           ))
@@ -91,16 +161,13 @@ const navLinks = [
         <div class="line"></div>
       </div>
       <div class="email-container">
-        <a href="mailto:Ridhokhalis37@gmail.com" target="_blank"
-          >Ridhokhalis37@gmail.com</a
-        >
+        <a href="mailto:Ridhokhalis37@gmail.com">Ridhokhalis37@gmail.com</a>
         <div class="line"></div>
       </div>
     </div>
   </body>
 
   <style is:global lang="scss">
-    @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap");
     :root {
       --navy-shadow: rgba(2, 12, 27, 0.7);
       --navy: #0b192f;
@@ -165,43 +232,28 @@ const navLinks = [
     body {
       -webkit-font-smoothing: antialiased;
       overflow-x: hidden;
-      height: 100vh;
-      width: 100vw;
-      overflow: hidden;
-    }
-
-    body.loaded {
-      height: 100%;
-      width: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
     }
 
     body.open {
       overflow: hidden;
     }
 
-    #root {
-      display: none;
-    }
-
-    #root.visible {
-      display: block;
-      opacity: 0;
-    }
-
-    #root.loaded {
-      opacity: 1;
-      transition: opacity 0.3s ease-in-out;
-    }
-
     .intro {
-      position: absolute;
+      position: fixed;
+      inset: 0;
+      z-index: 100;
       display: grid;
       place-items: center;
-      height: 100vh;
-      width: 100vw;
-      background-color: var(--dark-navy);
+      background-color: var(--navy);
+      transition: opacity 0.3s ease-out;
+
+      &.done {
+        display: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        display: none;
+      }
 
       @keyframes typing {
         from {
@@ -235,8 +287,8 @@ const navLinks = [
         font-family: var(--mono);
         background-color: var(--dark-primary-color);
 
-        animation: typing 2s steps(14), blink 0.5s step-end infinite alternate,
-          hide 0.5s ease-out 3s;
+        animation: typing 1s steps(14), blink 0.5s step-end infinite alternate,
+          hide 0.4s ease-out 1.4s forwards;
 
         width: 15ch;
         white-space: nowrap;
@@ -255,10 +307,6 @@ const navLinks = [
         .logo-tag {
           color: var(--white);
         }
-      }
-
-      .intro-logo.loaded {
-        display: none;
       }
     }
 
@@ -484,10 +532,6 @@ const navLinks = [
       transform: translateY(5%);
       transition: all 0.75s ease-in-out;
       filter: blur(5px);
-
-      @media (prefers-reduced-motion) {
-        transition: none;
-      }
     }
 
     .show {
@@ -495,50 +539,31 @@ const navLinks = [
       filter: blur(0);
       transform: translateY(0);
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      .hidden {
+        opacity: 1;
+        transform: none;
+        filter: none;
+      }
+    }
   </style>
 
   <script>
-    let prevScrollPos = window.pageYOffset;
+    const nav = document.querySelector("nav") as HTMLElement;
+    let prevScrollPos = window.scrollY;
 
     window.addEventListener("scroll", () => {
-      const nav = document.querySelector("nav") as HTMLElement;
-      const scrollPos = window.pageYOffset;
-
-      if (prevScrollPos > scrollPos) {
-        nav.classList.remove("hidden");
-      } else {
-        nav.classList.add("hidden");
-      }
-
+      const scrollPos = window.scrollY;
+      nav.classList.toggle("hidden", scrollPos > prevScrollPos && scrollPos > 0);
       prevScrollPos = scrollPos;
-    });
-
-    const root = document.getElementById("root") as HTMLElement;
-    const introLogo = document.querySelector(".intro-logo") as HTMLElement;
-    const body = document.querySelector("body") as HTMLElement;
-
-    document.addEventListener("DOMContentLoaded", function () {
-      const lastSeenIntro = localStorage.getItem("lastSeenIntro") || "0";
-      const ONE_DAY = 86400000;
-      const isNotShowIntro = JSON.parse(lastSeenIntro) > Date.now() - ONE_DAY;
-      if (isNotShowIntro) {
-        introLogo.classList.add("loaded");
-        root.classList.add("visible");
-        root.classList.add("loaded");
-        body.classList.add("loaded");
-        return;
-      }
-      setTimeout(() => {
-        introLogo.classList.add("loaded");
-      }, 3300);
-      setTimeout(() => {
-        root.classList.add("visible");
-      }, 3500);
-      setTimeout(() => {
-        root.classList.add("loaded");
-        body.classList.add("loaded");
-      }, 4000);
-      localStorage.setItem("lastSeenIntro", JSON.stringify(Date.now()));
     });
 
     const observer = new IntersectionObserver((entries) => {

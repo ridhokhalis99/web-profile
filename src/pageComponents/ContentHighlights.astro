@@ -1,6 +1,6 @@
 ---
 import SectionHeader from "../components/SectionHeader.astro";
-import contentFeeds from "../../public/data/contentFeeds";
+import contentFeeds from "../data/contentFeeds";
 type Platform = "linkedin" | "medium" | "tiktok";
 
 const platformMeta: Record<
@@ -51,6 +51,7 @@ const getDescription = (item: (typeof gridItems)[number]) => {
             class={`content-card platform-${item.platform}`}
             href={item.url}
             target="_blank"
+            rel="noopener noreferrer"
           >
             <div class="card-tag">
               <span class={`platform-chip platform-${item.platform}`}>
@@ -58,12 +59,36 @@ const getDescription = (item: (typeof gridItems)[number]) => {
               </span>
               <span class="badge">{item.badge}</span>
             </div>
-            {item.image && (
+            {item.video ? (
               <div class="card-media">
-                <img src={item.image} alt={item.title} loading="lazy" />
+                <video
+                  src={item.video}
+                  poster={item.image}
+                  width={item.width}
+                  height={item.height}
+                  autoplay
+                  muted
+                  loop
+                  playsinline
+                  preload="metadata"
+                  aria-label={item.title}
+                />
               </div>
+            ) : (
+              item.image && (
+                <div class="card-media">
+                  <img
+                    src={item.image}
+                    alt=""
+                    width={item.width}
+                    height={item.height}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                </div>
+              )
             )}
-            <h4>{item.title}</h4>
+            <h3>{item.title}</h3>
             <p class="description">{getDescription(item)}</p>
             <span class="card-cta">{item.cta}</span>
           </a>
@@ -72,6 +97,25 @@ const getDescription = (item: (typeof gridItems)[number]) => {
     </div>
   </div>
 </section>
+
+<script>
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const videos = document.querySelectorAll<HTMLVideoElement>("#content video");
+
+  if (!reduceMotion && videos.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          const video = entry.target as HTMLVideoElement;
+          if (entry.isIntersecting) video.play().catch(() => {});
+          else video.pause();
+        });
+      },
+      { threshold: 0.25 },
+    );
+    videos.forEach((video) => observer.observe(video));
+  }
+</script>
 
 <style lang="scss">
   section#content {
@@ -147,8 +191,10 @@ const getDescription = (item: (typeof gridItems)[number]) => {
           align-items: center;
           justify-content: center;
 
-          img {
+          img,
+          video {
             width: 100%;
+            height: auto;
             max-height: 220px;
             object-fit: contain;
             background-color: rgba(10, 25, 47, 0.3);
@@ -156,7 +202,7 @@ const getDescription = (item: (typeof gridItems)[number]) => {
           }
         }
 
-        h4 {
+        h3 {
           color: var(--lightest-slate);
           font-size: 20px;
           line-height: 1.3;

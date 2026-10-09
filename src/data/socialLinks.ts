@@ -1,8 +1,8 @@
-import Github from "../../src/icons/Github.astro";
-import Linkedin from "../../src/icons/Linkedin.astro";
-import Instagram from "../../src/icons/Instagram.astro";
-import Medium from "../../src/icons/Medium.astro";
-import Tiktok from "../../src/icons/Tiktok.astro";
+import Github from "../icons/Github.astro";
+import Linkedin from "../icons/Linkedin.astro";
+import Instagram from "../icons/Instagram.astro";
+import Medium from "../icons/Medium.astro";
+import Tiktok from "../icons/Tiktok.astro";
 
 const socialLinks = [
   {

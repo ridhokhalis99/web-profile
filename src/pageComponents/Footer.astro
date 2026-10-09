@@ -1,12 +1,17 @@
 ---
-import socialLinks from "../../public/data/socialLinks";
+import socialLinks from "../data/socialLinks";
 ---
 
 <footer>
   <div class="social-links">
     {
       socialLinks.map((socialLink) => (
-        <a href={socialLink.href} target="_blank">
+        <a
+          href={socialLink.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={socialLink.name}
+        >
           {<socialLink.component />}
         </a>
       ))
