@@ -23,3 +23,6 @@ pnpm-debug.log*
 # local tooling
 .claude/
 graphify-out/
+
+# source and reference photos (personal, not for the repo)
+design/photos/

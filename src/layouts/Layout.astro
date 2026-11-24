@@ -1,15 +1,19 @@
 ---
+import "../styles/global.css";
 import socialLinks from "../data/socialLinks";
-import NavMenu from "../components/NavMenu.astro";
 
 export interface Props {
   title: string;
   description?: string;
+  current?: "work" | "start";
+  cta?: string;
 }
 
 const {
   title,
-  description = "Ridho Khalis is a software engineer building reliable backend systems and full-stack products. Software Engineer at Transfez and founder of Erkabased.",
+  description = "Ridho Khalis is a backend engineer at Transfez and founder of Erkabased. He helps businesses turn ideas into software that keeps running.",
+  current,
+  cta = "Got a project?",
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -26,33 +30,23 @@ const personSchema = {
 };
 
 const navLinks = [
-  {
-    name: "About Me",
-    href: "#about",
-  },
-  {
-    name: "Projects",
-    href: "#projects",
-  },
-  {
-    name: "Content",
-    href: "#content",
-  },
-  {
-    name: "Contact",
-    href: "#contact",
-  },
+  { name: "Work", href: "/#work", key: "work" },
+  { name: "Writing & videos", href: "/#notes" },
+  { name: "About", href: "/#about" },
 ];
+const fonts =
+  "https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500..800&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Kalam:wght@400;700&display=swap";
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#0b192f" />
+    <meta name="theme-color" content="#f5f6f2" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#121419" media="(prefers-color-scheme: dark)" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
@@ -70,416 +64,127 @@ const navLinks = [
     <meta name="twitter:image" content={ogImage} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap"
-      media="print"
-      onload="this.media='all'"
-    />
-    <noscript>
-      <link
-        rel="stylesheet"
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Poppins:wght@300;400;500;600&display=swap"
-      />
-    </noscript>
+    <link rel="stylesheet" href={fonts} media="print" onload="this.media='all'" />
+    <noscript><link rel="stylesheet" href={fonts} /></noscript>
     <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
     <!-- Google tag (gtag.js) -->
-    <script
-      type="text/partytown"
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=G-4BZ8M3LS6R"
-    ></script>
+    <script type="text/partytown" async src="https://www.googletagmanager.com/gtag/js?id=G-4BZ8M3LS6R"></script>
     <script type="text/partytown">
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "G-4BZ8M3LS6R");
     </script>
   </head>
   <body>
-    <div id="root">
-      <nav aria-label="Main">
-        <div class="navbar-container">
-          <a class="logo" href="/" aria-label="Ridho Khalis home">
-            <img src="/logo.svg" alt="" width="40" height="40" />
-          </a>
-          <div class="navlink-container">
-            {
-              navLinks.map((navLink, index) => (
-                <a class="nav-link" href={navLink.href}>
-                  <span class="nav-link-index">{`0${index + 1}.`}</span>{" "}
-                  {navLink.name}
-                </a>
-              ))
-            }
+    <!-- Shared marker filter and arrowhead for every hand-drawn diagram -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+      <defs>
+        <filter id="rough" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.035" numOctaves="2" seed="4" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2.6" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+        <marker id="head" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+          <path d="M1 1.5 L10 6 L1 10.5" fill="none" stroke="context-stroke" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+        </marker>
+      </defs>
+    </svg>
+
+    <header class="nav">
+      <div class="wrap">
+        <a class="wordmark" href="/" aria-label="Ridho Khalis, home">Ridho Khalis
+          <svg viewBox="0 0 120 8" preserveAspectRatio="none" aria-hidden="true"><path class="d-marker" d="M2 5 C 30 2, 70 7, 118 3" /></svg>
+        </a>
+        <nav class="nav-links" aria-label="Main">
+          {navLinks.map((l) => <a href={l.href} aria-current={current && current === l.key ? "page" : undefined}>{l.name}</a>)}
+          <a class="nav-resume" href="/resume.pdf" target="_blank" rel="noopener">Résumé</a>
+          <a class="btn" href="/start" aria-current={current === "start" ? "page" : undefined}>Start a project</a>
+          <details class="menu">
+            <summary aria-label="Menu">
+              <svg class="i-open" viewBox="0 0 24 24" aria-hidden="true"><g class="rough"><path class="d-stroke" d="M3 6.5 C 9 5.5, 15 7, 21 6M3 12.2 C 9 11.6, 15 12.8, 21 11.8M3 17.8 C 9 17.2, 15 18.4, 21 17.5" /></g></svg>
+              <svg class="i-close" viewBox="0 0 24 24" aria-hidden="true"><g class="rough"><path class="d-marker" d="M5 5 C 10 10, 14 14, 19 19M19 5 C 14 10, 10 14, 5 19" /></g></svg>
+            </summary>
+            <ul>
+              {navLinks.map((l) => <li><a href={l.href}>{l.name}</a></li>)}
+              <li><a href="/resume.pdf">Résumé</a></li>
+            </ul>
+          </details>
+        </nav>
+      </div>
+    </header>
+
+    <slot />
+
+    {
+      current !== "start" && (
+        <section class="cta-band">
+          <div class="wrap">
+            <h2>
+              {cta} Let's{" "}
+              <span class="circled">
+                sketch it
+                <svg viewBox="0 0 200 80" preserveAspectRatio="none" aria-hidden="true">
+                  <path class="d-marker draw" style="--len:520;--d:.2s" d="M30 12 C 90 -2, 190 6, 194 38 C 198 70, 70 82, 18 64 C -6 54, 6 18, 56 10" />
+                </svg>
+              </span>{" "}
+              out.
+            </h2>
+            <div class="cta-side">
+              <p class="muted">Tell me what you're building and where you're stuck. We'll take it from there.</p>
+              <a class="btn" href="/start">Start a project</a>
+              <div class="email-card">
+                <span class="hand">or just email me</span>
+                <a class="email-addr" href="mailto:ridhokhalis37@gmail.com">ridhokhalis37@gmail.com</a>
+                <button class="copy" type="button" data-copy="ridhokhalis37@gmail.com">Copy email</button>
+              </div>
+            </div>
           </div>
-          <NavMenu />
+        </section>
+      )
+    }
+
+    <footer class="footer">
+      <div class="wrap">
+        <div class="f-brand">
+          <span class="wordmark">Ridho Khalis</span>
+          <span class="muted">Backend engineer. Founder of Erkabased.</span>
+          <span class="muted">© {new Date().getFullYear()}</span>
         </div>
-      </nav>
-      <slot />
-      <div class="social-container">
-        {
-          socialLinks.map((socialLink) => (
-            <a
-              href={socialLink.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={socialLink.name}
-            >
-              {<socialLink.component />}
-            </a>
-          ))
-        }
-        <div class="line"></div>
+        <div>
+          <h4>Site</h4>
+          <ul>
+            {navLinks.map((l) => <li><a href={l.href}>{l.name}</a></li>)}
+            <li><a href="/start">Start a project</a></li>
+            <li><a href="/resume.pdf">Résumé</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Elsewhere</h4>
+          <ul>
+            {socialLinks.map((l) => <li><a href={l.href} target="_blank" rel="noopener noreferrer">{l.name}</a></li>)}
+          </ul>
+        </div>
       </div>
-      <div class="email-container">
-        <a href="mailto:Ridhokhalis37@gmail.com">Ridhokhalis37@gmail.com</a>
-        <div class="line"></div>
-      </div>
-    </div>
+    </footer>
+
+    <script>
+      document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((b) =>
+        b.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(b.dataset.copy!);
+            b.textContent = "Copied";
+          } catch {
+            b.textContent = "Select and copy";
+          }
+          setTimeout(() => (b.textContent = "Copy email"), 2000);
+        }),
+      );
+      // Close the mobile menu after a link is chosen (same-page anchors keep <details> open otherwise).
+      document.querySelectorAll(".menu a").forEach((a) =>
+        a.addEventListener("click", () => a.closest("details")?.removeAttribute("open")),
+      );
+    </script>
   </body>
-
-  <style is:global lang="scss">
-    :root {
-      --navy-shadow: rgba(2, 12, 27, 0.7);
-      --navy: #0b192f;
-      --light-navy: #112240;
-      --primary-color: #64ffda;
-      --dark-primary-color: #0d1e33;
-      --lightest-slate: #ccd6f6;
-      --light-slate: #aab1c6;
-      --slate: #8892b0;
-      --dark-slate: #495670;
-      --white: #fff;
-
-      --mono: "Fira Code", monospace;
-      --sans: "Poppins", system-ui, sans-serif;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      font-family: "Poppins", system-ui, sans-serif;
-      scroll-behavior: smooth;
-      background-color: var(--navy);
-    }
-
-    a {
-      text-decoration: none;
-    }
-
-    p {
-      @media screen and (max-width: 480px) {
-        font-size: 14px;
-      }
-    }
-
-    .cta,
-    button {
-      width: fit-content;
-      padding: 16px 24px;
-      border: 1px solid var(--primary-color);
-      background-color: transparent;
-      color: var(--primary-color);
-      border-radius: 4px;
-      font-family: var(--mono);
-      text-transform: capitalize;
-      transition: all 0.3s ease-in-out;
-      cursor: pointer;
-
-      @media screen and (max-width: 480px) {
-        padding: 12px 16px;
-        font-size: 12px;
-      }
-
-      &:hover {
-        background-color: var(--primary-color);
-        color: var(--navy);
-      }
-    }
-
-    body {
-      -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body.open {
-      overflow: hidden;
-    }
-
-    section {
-      height: fit-content;
-      color: var(--slate);
-      padding: 50px;
-
-      @media screen and (max-width: 1024px) {
-        padding: 50px 0;
-      }
-
-      .section-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        padding: 0 64px;
-        height: 100%;
-        margin: auto;
-        max-width: 1024px;
-
-        @media screen and (max-width: 480px) {
-          padding: 16px 24px;
-        }
-      }
-    }
-
-    nav {
-      padding: 24px 50px;
-      position: fixed;
-      z-index: 10;
-      top: 0;
-      width: calc(100% - 100px);
-      background-color: var(--dark-primary-color);
-      opacity: 0.9;
-      transition: all 0.3s ease-in-out;
-
-      @media screen and (max-width: 480px) {
-        width: calc(100% - 48px);
-        padding: 24px 24px;
-      }
-
-      .navbar-container {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin: auto;
-        max-width: 1440px;
-
-        a {
-          color: var(--white);
-        }
-
-        .logo {
-          height: 40px !important;
-        }
-
-        .navlink-container {
-          display: flex;
-          gap: 24px;
-
-          @media screen and (max-width: 1024px) {
-            position: absolute;
-            visibility: hidden;
-            transform: translateY(-100vh);
-          }
-
-          .nav-link {
-            font-family: var(--mono);
-            font-size: 14px;
-            letter-spacing: 1px;
-            transition: all 0.3s ease-in-out;
-
-            &:hover {
-              color: var(--primary-color);
-            }
-
-            .nav-link-index {
-              color: var(--primary-color);
-            }
-          }
-        }
-
-        .navlink-container.open {
-          visibility: visible;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 36px;
-          position: absolute;
-          top: 0;
-          right: 0;
-          transform: translateY(0);
-          background-color: var(--light-navy);
-          box-shadow: 0 0 20px var(--navy-shadow);
-          z-index: 10;
-          height: 100vh;
-          width: 50vw;
-          transition: all 0.25s ease-in-out;
-
-          .nav-link {
-            text-align: center;
-            font-size: 16px;
-
-            .nav-link-index {
-              display: block;
-              color: var(--primary-color);
-              margin-bottom: 8px;
-            }
-          }
-        }
-      }
-
-      .navbar-container.open {
-        filter: blur(5px);
-      }
-    }
-
-    nav.hidden {
-      transform: translateY(-100%);
-    }
-
-    main.open {
-      filter: blur(5px);
-    }
-
-    .social-container {
-      position: fixed;
-      left: 48px;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 20px;
-
-      @media screen and (max-width: 1024px) {
-        display: none;
-      }
-
-      .social-icon {
-        stroke: var(--lightest-slate);
-        transition: all 0.3s ease-in-out;
-
-        &:hover {
-          stroke: var(--primary-color);
-          transform: translateY(-8px);
-        }
-      }
-
-      .line {
-        width: 1px;
-        height: 12vh;
-        background-color: var(--lightest-slate);
-        margin: auto;
-        margin-top: 24px;
-      }
-    }
-
-    .email-container {
-      position: fixed;
-      right: 48px;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      width: 20px;
-
-      @media screen and (max-width: 1024px) {
-        display: none;
-      }
-
-      a {
-        font-family: var(--mono);
-        color: var(--lightest-slate);
-        transition: all 0.3s ease-in-out;
-        writing-mode: vertical-rl;
-        letter-spacing: 2px;
-        font-size: 12px;
-
-        &:hover {
-          color: var(--primary-color);
-          transform: translateY(-8px);
-        }
-      }
-
-      .line {
-        width: 1px;
-        height: 12vh;
-        background-color: var(--lightest-slate);
-        margin: auto;
-        margin-top: 24px;
-      }
-    }
-
-    ::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background-color: var(--dark-slate);
-      border-radius: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: var(--navy);
-    }
-
-    .primary-mono {
-      font-family: var(--mono);
-      color: var(--primary-color);
-      font-size: 16px;
-      letter-spacing: 2px;
-    }
-
-    .link {
-      font-family: var(--mono);
-      color: var(--primary-color);
-    }
-
-    .hidden {
-      opacity: 0;
-      transform: translateY(5%);
-      transition: all 0.75s ease-in-out;
-      filter: blur(5px);
-    }
-
-    .show {
-      opacity: 1;
-      filter: blur(0);
-      transform: translateY(0);
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *,
-      *::before,
-      *::after {
-        animation: none !important;
-        transition: none !important;
-      }
-
-      .hidden {
-        opacity: 1;
-        transform: none;
-        filter: none;
-      }
-    }
-  </style>
-
-  <script>
-    const nav = document.querySelector("nav") as HTMLElement;
-    let prevScrollPos = window.scrollY;
-
-    window.addEventListener("scroll", () => {
-      const scrollPos = window.scrollY;
-      nav.classList.toggle("hidden", scrollPos > prevScrollPos && scrollPos > 0);
-      prevScrollPos = scrollPos;
-    });
-
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("show");
-        }
-      });
-    });
-
-    const hiddenElements = document.querySelectorAll(".hidden");
-    hiddenElements.forEach((element) => {
-      observer.observe(element);
-    });
-  </script>
 </html>

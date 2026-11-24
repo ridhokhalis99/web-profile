@@ -1,20 +1,314 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import About from "../pageComponents/About.astro";
-import Contact from "../pageComponents/Contact.astro";
-import Footer from "../pageComponents/Footer.astro";
-import Hero from "../pageComponents/Hero.astro";
-import Projects from "../pageComponents/Projects.astro";
-import ContentHighlights from "../pageComponents/ContentHighlights.astro";
+import projects from "../data/projects";
+import contentFeeds from "../data/contentFeeds";
+
+const videos = contentFeeds.tiktok;
+const articles = contentFeeds.medium;
+const articleTopics = ["Distributed systems", "Databases", "Engineering"];
+const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
 ---
 
-<Layout title="Ridho Khalis">
+<Layout title="Ridho Khalis · Backend engineer and builder">
   <main>
-    <Hero />
-    <About />
-    <Projects />
-    <ContentHighlights />
-    <Contact />
-    <Footer />
+    <section class="hero">
+      <div class="wrap">
+        <div class="hero-copy">
+          <p class="hand hero-hi">Hi, I'm Ridho.</p>
+          <h1 class="hero-h1">
+            From idea to <span class="ul">running product.<svg viewBox="0 0 300 18" preserveAspectRatio="none" aria-hidden="true"><path class="d-marker draw" style="--len:340;--d:.15s" d="M4 12 C 70 4, 180 16, 296 6" /></svg></span>
+          </h1>
+          <p class="lede">
+            I'm a backend engineer at Transfez and founder of Erkabased. I help businesses turn ideas into software that keeps running, and share what I learn along the way.
+          </p>
+          <div class="hero-ctas">
+            <a class="btn" href="/start">Start a project
+              <svg class="arrow-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+            </a>
+            <a class="btn btn-ghost" href="/resume.pdf" target="_blank" rel="noopener">
+              <svg class="arrow-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
+              Check my résumé
+            </a>
+            <a class="link-arrow" href="#work">See my work</a>
+          </div>
+        </div>
+
+        <div class="hero-diagram">
+          <svg viewBox="0 0 560 560" role="img" aria-label="Diagram: your idea goes to Ridho, who turns it into a product people use, like Rekanka.">
+            <defs><clipPath id="heroClip"><circle cx="405" cy="280" r="130" /><rect x="290" y="0" width="232" height="240" /></clipPath></defs>
+            <g class="rough">
+              <rect class="d-fill d-stroke" x="16" y="28" width="236" height="104" rx="10" />
+              <rect class="d-wash" x="16" y="28" width="236" height="104" rx="10" />
+            </g>
+            <text class="d-text" x="38" y="72" font-size="24">Your idea</text>
+            <text class="d-small" x="38" y="102" font-size="15">a business, a workflow</text>
+            <g class="rough"><path class="d-stroke draw" style="--len:260;--d:.25s" marker-end="url(#head)" d="M252 84 C 300 86, 318 120, 300 176" /></g>
+            <text class="d-hand" x="292" y="70" font-size="19">scope it</text>
+            <path class="blob" d="M508 222 L 556 194 L 524 268 Z" />
+            <circle class="blob" cx="405" cy="280" r="130" />
+            <g class="rough"><path class="d-marker" d="M452 436 A 152 152 0 0 0 534 372" /></g>
+            <image href="/assets/images/ridho-hero.webp" x="262" y="104" width="285" height="344" clip-path="url(#heroClip)" />
+            <text class="d-hand" x="96" y="250" font-size="22">that's me</text>
+            <g class="rough"><path class="d-marker draw" style="--len:180;--d:.7s" marker-end="url(#head)" d="M150 262 C 180 300, 220 300, 262 280" /></g>
+            <g class="rough"><path class="d-stroke draw" style="--len:240;--d:1s" marker-end="url(#head)" d="M366 420 C 350 446, 310 458, 262 460" /></g>
+            <text class="d-hand" x="372" y="470" font-size="19">build &amp; ship</text>
+            <g class="rough"><rect class="d-fill d-stroke" x="16" y="414" width="244" height="120" rx="10" /></g>
+            <text class="d-text" x="38" y="456" font-size="24">A product</text>
+            <text class="d-text" x="38" y="484" font-size="24">people use</text>
+            <text class="d-mono" x="38" y="514" font-size="13">e.g. Rekanka · live</text>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <div class="proof">
+      <ul class="wrap" aria-label="Background">
+        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Articles on <b>Medium</b></span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Videos on <b>TikTok</b></span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span><b>AWS Certified</b> Solutions Architect, Associate</span></li>
+        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Shipping software <b>since 2022</b></span></li>
+      </ul>
+    </div>
+
+    <section class="section help" id="help">
+      <div class="wrap">
+        <div class="help-head">
+          <h2>How can I help?</h2>
+          <p class="muted">Most people reach me for one of three things.</p>
+          <p class="hand pick">pick a path →</p>
+        </div>
+        <ol class="paths">
+          <li class="path">
+            <svg viewBox="0 0 64 40" aria-hidden="true"><g class="rough"><path class="d-marker" marker-end="url(#head)" d="M2 30 C 18 4, 40 8, 60 20" /></g></svg>
+            <div class="path-body">
+              <h3>An app built for your business</h3>
+              <p>Through Erkabased: we scope it together, then design, build and launch it. Web, mobile, or both.</p>
+              <a class="link-arrow" href="/start?need=app">Start a project</a>
+            </div>
+          </li>
+          <li class="path">
+            <svg viewBox="0 0 64 40" aria-hidden="true"><g class="rough"><path class="d-marker" marker-end="url(#head)" d="M2 20 C 20 22, 40 18, 60 20" /></g></svg>
+            <div class="path-body">
+              <h3>A backend that holds up under load</h3>
+              <p>Reliability, data consistency and slow queries. My Ledgers project handled <span class="mono">1,000</span> concurrent users at <span class="mono">~179 ms p95</span> with zero errors.</p>
+              <a class="link-arrow" href="/start?need=backend">Talk backend</a>
+            </div>
+          </li>
+          <li class="path">
+            <svg viewBox="0 0 64 40" aria-hidden="true"><g class="rough"><path class="d-marker" marker-end="url(#head)" d="M2 8 C 18 34, 40 32, 60 22" /></g></svg>
+            <div class="path-body">
+              <h3>To learn what I learn</h3>
+              <p>Short videos on AI agents and automation, and longer articles on system design trade-offs.</p>
+              <a class="link-arrow" href="#notes">Read &amp; watch</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section" id="work">
+      <div class="wrap">
+        <div class="work-head">
+          <h2>Things I've built</h2>
+          <a class="link-arrow" href="https://github.com/ridhokhalis99" target="_blank" rel="noopener noreferrer">More on GitHub</a>
+        </div>
+
+        <article class="feature">
+          <div class="feature-copy">
+            <span class="status"><i></i>Live · rekanka-app.erkabased.com</span>
+            <h3 class="feature-title">Rekanka</h3>
+            <p class="muted">Runs an Indonesian small business from one app: an offline cashier, stock and recipes with cost per portion, delivery-platform reports turned into profit per channel, a storefront and invoices.</p>
+            <ul class="stack">{["Next.js", "NestJS", "PostgreSQL", "Drizzle", "BullMQ", "Redis", "Capacitor"].map((t) => <li>{t}</li>)}</ul>
+            <a class="link-arrow" href="/work/rekanka">Read the case study</a>
+          </div>
+          <div class="feature-diagram">
+            <svg viewBox="0 0 620 380" role="img" aria-label="Rekanka architecture: cashier app, back office and storefront call a NestJS API backed by PostgreSQL; delivery reports go through BullMQ jobs.">
+              <g class="rough">
+                <rect class="d-fill d-stroke" x="10" y="20" width="150" height="62" rx="8" />
+                <rect class="d-fill d-stroke" x="10" y="110" width="150" height="62" rx="8" />
+                <rect class="d-fill d-stroke" x="10" y="200" width="150" height="62" rx="8" />
+                <rect class="d-wash" x="236" y="96" width="160" height="90" rx="10" />
+                <rect class="d-stroke" x="236" y="96" width="160" height="90" rx="10" />
+                <path class="d-fill d-stroke" d="M470 104 v 66 c 0 12, 130 12, 130 0 v -66" />
+                <ellipse class="d-fill d-stroke" cx="535" cy="104" rx="65" ry="12" />
+                <rect class="d-fill d-stroke" x="236" y="270" width="160" height="62" rx="8" />
+                <rect class="d-fill d-stroke" x="470" y="270" width="130" height="62" rx="8" />
+                <path class="d-stroke" marker-end="url(#head)" d="M160 51 C 200 56, 210 110, 232 126" />
+                <path class="d-stroke" marker-end="url(#head)" d="M160 141 L 232 141" />
+                <path class="d-stroke" marker-end="url(#head)" d="M160 231 C 200 226, 210 172, 232 158" />
+                <path class="d-stroke" marker-end="url(#head)" d="M396 141 L 466 141" />
+                <path class="d-stroke" marker-end="url(#head)" d="M316 186 L 316 266" />
+                <path class="d-stroke" marker-end="url(#head)" d="M396 301 L 466 301" />
+              </g>
+              <text class="d-text" x="26" y="50" font-size="16">Cashier</text><text class="d-mono" x="26" y="70" font-size="11">PWA + Capacitor</text>
+              <text class="d-text" x="26" y="140" font-size="16">Back office</text><text class="d-mono" x="26" y="160" font-size="11">Next.js</text>
+              <text class="d-text" x="26" y="230" font-size="16">Storefront</text><text class="d-mono" x="26" y="250" font-size="11">online orders</text>
+              <text class="d-text" x="254" y="134" font-size="18">API</text><text class="d-mono" x="254" y="156" font-size="11">NestJS</text>
+              <text class="d-text" x="490" y="146" font-size="16">PostgreSQL</text><text class="d-mono" x="490" y="164" font-size="11">Drizzle</text>
+              <text class="d-text" x="254" y="300" font-size="16">Jobs</text><text class="d-mono" x="254" y="320" font-size="11">BullMQ + Redis</text>
+              <text class="d-text" x="486" y="300" font-size="16">Files</text><text class="d-mono" x="486" y="320" font-size="11">S3</text>
+              <text class="d-hand" x="22" y="300" font-size="16">works offline ↑</text>
+              <text class="d-hand" x="22" y="350" font-size="16">GoFood · GrabFood · ShopeeFood</text>
+              <text class="d-hand" x="22" y="370" font-size="16">reports → profit per channel</text>
+              <g class="rough"><path class="d-marker" marker-end="url(#head)" d="M266 356 C 284 356, 296 350, 300 338" /></g>
+            </svg>
+          </div>
+        </article>
+
+        <ul class="projects">
+          {
+            projects.map((p) => (
+              <li>
+                <h3>{p.link ? <a href={p.link} target="_blank" rel="noopener noreferrer">{p.title}</a> : p.title}</h3>
+                <p>
+                  {p.description}
+                  {p.metric && <span class="metric mono">{p.metric}</span>}
+                </p>
+                <ul class="stack">{p.techStack.map((t) => <li>{t}</li>)}</ul>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="notes">
+      <div class="wrap">
+        <div class="notes-head">
+          <h2>From my notes</h2>
+          <p class="muted">What I'm learning, as short videos and long reads.</p>
+        </div>
+        <div class="notes-grid">
+          <div class="videos">
+            {
+              videos.map((v) => (
+                <a class="video" href={v.url} target="_blank" rel="noopener noreferrer">
+                  <div class="thumb">
+                    <img src={v.image} alt="" width={v.width} height={v.height} loading="lazy" />
+                    <span class="play"><svg width="12" height="12" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 1.5v9l7-4.5z" fill="currentColor" /></svg></span>
+                  </div>
+                  <span>{v.title}</span>
+                </a>
+              ))
+            }
+          </div>
+          <ul class="articles">
+            {
+              articles.map((a, i) => (
+                <li>
+                  <a href={a.url} target="_blank" rel="noopener noreferrer">
+                    <span class="mono muted">Medium · {articleTopics[i]}</span>
+                    <h3>{a.title}</h3>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about">
+      <div class="wrap">
+        <figure class="portrait">
+          <svg viewBox="0 0 440 470" role="img" aria-label="Ridho Khalis, chin in hand, thinking">
+            <defs><clipPath id="aboutClip"><circle cx="220" cy="270" r="172" /><rect x="110" y="0" width="230" height="250" /></clipPath></defs>
+            <path class="blob" d="M66 196 L 18 160 L 62 250 Z" />
+            <circle class="blob" cx="220" cy="270" r="172" />
+            <g class="rough"><path class="d-marker" d="M392 214 A 190 190 0 0 1 380 380" /><path class="d-marker" d="M60 420 A 196 196 0 0 0 150 452" /></g>
+            <image href="/assets/images/ridho-about.webp" x="34" y="82" width="390" height="369" clip-path="url(#aboutClip)" />
+          </svg>
+          <figcaption class="hand">sketching the next one…</figcaption>
+        </figure>
+        <div class="about-copy">
+          <h2>Hey, I'm Ridho.</h2>
+          <p>I'm a software engineer from Indonesia. By day I build backend systems at Transfez. The rest of the time I build products with Erkabased.</p>
+          <p>I care about systems that stay correct when traffic spikes, and about software that makes a small business owner's day easier. I make videos and write about what I learn along the way, because explaining something is how I find out if I understand it.</p>
+          <div class="about-links">
+            <a class="link-arrow" href="/resume.pdf" target="_blank" rel="noopener">Check my résumé (PDF)</a>
+            <a class="link-arrow" href="https://www.linkedin.com/in/ridho-khalis/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 </Layout>
+
+<style>
+  .hero { padding-block: clamp(48px, 7vw, 96px) clamp(40px, 6vw, 80px); }
+  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: clamp(32px, 5vw, 72px); align-items: center; }
+  .hero-copy { display: grid; gap: 26px; justify-items: start; }
+  .hero-hi { font-size: 1.5rem; }
+  .hero-h1 { font-size: clamp(2.4rem, 1rem + 6vw, 6rem); line-height: 0.98; letter-spacing: -0.03em; }
+  .hero-h1 .ul { position: relative; white-space: nowrap; }
+  .hero-h1 .ul svg { position: absolute; left: 0; bottom: -0.12em; width: 100%; height: 0.22em; }
+  .hero-h1 .ul .d-marker { stroke-width: 5; }
+  .hero-ctas { display: flex; flex-wrap: wrap; align-items: center; gap: 22px; }
+  .hero-diagram svg { width: 100%; height: auto; }
+  @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } .hero-diagram { max-width: 520px; } }
+
+  .proof { border-block: 1px solid var(--line); background: var(--board-2); }
+  .proof ul { list-style: none; margin: 0 auto; padding-block: 18px; display: flex; flex-wrap: wrap; gap: 10px 0; justify-content: space-between; font-size: var(--step--1); color: var(--ink-2); }
+  .proof li { display: flex; align-items: center; gap: 10px; padding-right: 22px; }
+  .proof b { color: var(--ink); font-weight: 600; }
+  .proof svg { width: 16px; height: 16px; flex: none; }
+
+  .help .wrap { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: clamp(32px, 6vw, 96px); }
+  .help-head { display: grid; gap: 14px; align-content: start; position: sticky; top: 100px; }
+  .pick { font-size: 1.25rem; }
+  .paths { list-style: none; margin: 0; padding: 0; display: grid; }
+  .path { display: grid; grid-template-columns: 64px 1fr; gap: 20px; padding-block: 30px; border-top: 1.5px dashed var(--line); }
+  .path:last-child { border-bottom: 1.5px dashed var(--line); }
+  .path svg { width: 64px; height: 40px; margin-top: 6px; }
+  .path-body { display: grid; gap: 10px; justify-items: start; }
+  .path-body p { max-width: 54ch; color: var(--ink-2); }
+  .path .mono { color: var(--ink); background: var(--marker-wash); padding: 2px 6px; border-radius: 4px; }
+  @media (max-width: 860px) { .help .wrap { grid-template-columns: 1fr; } .help-head { position: static; } .path { grid-template-columns: 44px 1fr; } .path svg { width: 44px; } }
+
+  .work-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 40px; }
+  .feature { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: clamp(28px, 4vw, 56px); align-items: center; padding: clamp(24px, 3vw, 40px); background: var(--board); border: 1.5px solid var(--ink); border-radius: 14px; box-shadow: 0 18px 40px -28px rgba(21, 23, 28, 0.35); }
+  .feature-copy { display: grid; gap: 16px; justify-items: start; }
+  .feature-title { font-size: var(--step-3); }
+  .status { font-family: var(--mono); font-size: 0.75rem; display: inline-flex; align-items: center; gap: 6px; color: var(--ink-2); }
+  .status i { width: 8px; height: 8px; border-radius: 50%; background: #1f9d55; display: inline-block; }
+  .feature-diagram { min-width: 0; overflow-x: auto; }
+  .feature-diagram svg { width: 100%; min-width: 460px; height: auto; }
+  @media (max-width: 900px) { .feature { grid-template-columns: 1fr; } }
+  .projects { list-style: none; margin: 28px 0 0; padding: 0; }
+  .projects > li { display: grid; grid-template-columns: 180px 1fr auto; gap: 24px; align-items: baseline; padding-block: 22px; border-bottom: 1px solid var(--line); }
+  .projects h3 { font-size: 1.35rem; }
+  .projects h3 a { text-decoration: none; }
+  .projects h3 a:hover { color: var(--marker); }
+  .projects p { color: var(--ink-2); max-width: 60ch; }
+  .projects .metric { display: block; margin-top: 6px; color: var(--ink); }
+  @media (max-width: 760px) { .projects > li { grid-template-columns: 1fr; gap: 8px; } }
+
+  .notes-head { display: grid; gap: 10px; margin-bottom: 32px; }
+  .notes-grid { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(28px, 4vw, 56px); }
+  .videos { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .video { display: grid; gap: 10px; align-content: start; text-decoration: none; }
+  .video .thumb { position: relative; aspect-ratio: 4 / 5; border-radius: 10px; overflow: hidden; border: 1.5px solid var(--ink); max-width: 100%; }
+  .video img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+  .video:hover img { transform: scale(1.04); }
+  .video .play { position: absolute; left: 10px; bottom: 10px; width: 34px; height: 34px; border-radius: 50%; background: var(--board); display: grid; place-items: center; border: 1.5px solid var(--ink); }
+  .video span { font-weight: 600; font-size: 0.95rem; line-height: 1.3; }
+  .articles { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
+  .articles li { border-top: 1px solid var(--line); }
+  .articles li:last-child { border-bottom: 1px solid var(--line); }
+  .articles a { display: grid; gap: 6px; padding-block: 18px; text-decoration: none; }
+  .articles a:hover h3 { color: var(--marker); }
+  .articles h3 { font-size: 1.15rem; }
+  .articles .mono { font-size: 0.75rem; }
+  @media (max-width: 900px) { .notes-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 520px) { .videos { grid-template-columns: repeat(3, 72%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; } .video { scroll-snap-align: start; } }
+
+  .about .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
+  .portrait { margin: 0; position: relative; max-width: 420px; }
+  .portrait svg { width: 100%; height: auto; }
+  .portrait .hand { position: absolute; right: 0; bottom: -8px; font-size: 1.2rem; transform: rotate(-4deg); }
+  .about-copy { display: grid; gap: 18px; justify-items: start; }
+  .about-copy p { max-width: 58ch; color: var(--ink-2); }
+  .about-copy p:first-of-type { color: var(--ink); font-size: var(--step-1); line-height: 1.5; }
+  .about-links { display: flex; flex-wrap: wrap; gap: 24px; }
+  @media (max-width: 820px) { .about .wrap { grid-template-columns: 1fr; } .portrait { max-width: 340px; margin-bottom: 24px; } }
+</style>

@@ -1,35 +1,9 @@
-import Github from "../icons/Github.astro";
-import Linkedin from "../icons/Linkedin.astro";
-import Instagram from "../icons/Instagram.astro";
-import Medium from "../icons/Medium.astro";
-import Tiktok from "../icons/Tiktok.astro";
-
 const socialLinks = [
-  {
-    name: "Github",
-    href: "https://github.com/ridhokhalis99",
-    component: Github,
-  },
-  {
-    name: "Linkedin",
-    href: "https://www.linkedin.com/in/ridho-khalis/",
-    component: Linkedin,
-  },
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/ridhobahastech/",
-    component: Instagram,
-  },
-  {
-    name: "Medium",
-    href: "https://medium.com/@ridhokhalis",
-    component: Medium,
-  },
-  {
-    name: "Tiktok",
-    href: "https://www.tiktok.com/@ridhobahastech",
-    component: Tiktok,
-  },
+  { name: "GitHub", href: "https://github.com/ridhokhalis99" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/ridho-khalis/" },
+  { name: "TikTok", href: "https://www.tiktok.com/@ridhobahastech" },
+  { name: "Instagram", href: "https://www.instagram.com/ridhobahastech/" },
+  { name: "Medium", href: "https://medium.com/@ridhokhalis" },
 ];
 
 export default socialLinks;

@@ -1,0 +1,156 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+// Set PUBLIC_WEB3FORMS_KEY to deliver the form through Web3Forms.
+// Without it, sending opens the visitor's email app with the note filled in.
+const formKey = import.meta.env.PUBLIC_WEB3FORMS_KEY;
+const needs = [
+  ["app", "A new app"],
+  ["backend", "Backend help"],
+  ["automation", "AI & automation"],
+  ["other", "Something else"],
+];
+const steps = [
+  ["You send a short note", "The problem, who it's for, and any deadline."],
+  ["We talk it through", "A call to draw the system and agree on scope."],
+  ["We build it", "Through Erkabased, with regular demos until launch."],
+];
+---
+
+<Layout
+  title="Start a project · Ridho Khalis"
+  description="Tell Ridho Khalis what you want to build, or what's breaking. A few lines is enough."
+  current="start"
+>
+  <main class="wrap hire">
+    <div class="hire-intro">
+      <h1>Let's sketch your project.</h1>
+      <p class="lede">A few lines is enough. Tell me what you want to build, or what's breaking.</p>
+      <ol class="steps">
+        {
+          steps.map(([h, p], i) => (
+            <li>
+              <span class="n">
+                <svg viewBox="0 0 44 44" aria-hidden="true"><g class="rough"><circle class="d-marker" cx="22" cy="22" r="18" /></g></svg>
+                {i + 1}
+              </span>
+              <div><h3>{h}</h3><p>{p}</p></div>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="alt">
+        <span class="muted">Prefer email?</span>
+        <a class="email-addr" href="mailto:ridhokhalis37@gmail.com">ridhokhalis37@gmail.com</a>
+        <span class="muted">Or message me on <a href="https://www.linkedin.com/in/ridho-khalis/" target="_blank" rel="noopener noreferrer">LinkedIn</a>.</span>
+      </div>
+    </div>
+
+    <form id="brief" method="POST" action="https://api.web3forms.com/submit" data-key={formKey ?? ""}>
+      {formKey && <input type="hidden" name="access_key" value={formKey} />}
+      <input type="hidden" name="subject" value="New project note from ridhokhalis.com" />
+      <input type="hidden" name="redirect" value="https://ridhokhalis.com/start?sent=1" />
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+      <p class="sent" id="sent" role="status" hidden>Thanks, your note is in. I'll reply by email.</p>
+
+      <fieldset>
+        <legend>What do you need?</legend>
+        <div class="choices">
+          {
+            needs.map(([v, label], i) => (
+              <label>
+                <input type="radio" name="need" id={`need-${v}`} value={label} checked={i === 0} />
+                <span>{label}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+      <div class="row2">
+        <div class="field"><label for="name">Your name</label><input type="text" id="name" name="name" autocomplete="name" required maxlength="120" /></div>
+        <div class="field"><label for="email">Email</label><input type="email" id="email" name="email" autocomplete="email" required maxlength="200" /></div>
+      </div>
+      <div class="field">
+        <label for="about">Tell me about it</label>
+        <textarea id="about" name="message" required maxlength="5000" placeholder="e.g. We run three coffee shops and track stock in a spreadsheet. We'd like one app for the cashier and stock."></textarea>
+      </div>
+      <div class="field">
+        <label for="when">When do you need it? <small>optional</small></label>
+        <input type="text" id="when" name="timeline" maxlength="200" placeholder="e.g. before Ramadan, or no rush" />
+      </div>
+      <div class="submit-row">
+        <small class="muted">I'll reply by email.</small>
+        <button class="btn" type="submit">Send project note</button>
+      </div>
+    </form>
+  </main>
+</Layout>
+
+<script>
+  const form = document.getElementById("brief") as HTMLFormElement;
+  const params = new URLSearchParams(location.search);
+  if (params.get("sent")) document.getElementById("sent")!.hidden = false;
+  const need = params.get("need");
+  if (need) (document.getElementById(`need-${need}`) as HTMLInputElement | null)?.click();
+
+  // No form service configured: hand the note to the visitor's email app instead.
+  if (!form.dataset.key) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const d = new FormData(form);
+      const body = [
+        `Need: ${d.get("need")}`,
+        `Name: ${d.get("name")}`,
+        `Email: ${d.get("email")}`,
+        `Timeline: ${d.get("timeline") || "-"}`,
+        "",
+        String(d.get("message")),
+      ].join("\n");
+      location.href = `mailto:ridhokhalis37@gmail.com?subject=${encodeURIComponent("Project note")}&body=${encodeURIComponent(body)}`;
+    });
+  }
+</script>
+
+<style>
+  .hire { display: grid; grid-template-columns: 1fr 1.05fr; gap: clamp(36px, 6vw, 96px); padding-block: clamp(48px, 7vw, 96px); align-items: start; }
+  .hire-intro { display: grid; gap: 24px; position: sticky; top: 100px; }
+  .steps { list-style: none; margin: 12px 0 0; padding: 0; display: grid; }
+  .steps li { display: grid; grid-template-columns: 46px 1fr; gap: 16px; padding-bottom: 26px; position: relative; }
+  .steps li:not(:last-child)::before { content: ""; position: absolute; left: 22px; top: 44px; bottom: 4px; border-left: 2px dashed var(--line); }
+  .steps .n { width: 44px; height: 44px; display: grid; place-items: center; position: relative; font: 700 1.25rem var(--hand); color: var(--marker); }
+  .steps .n svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .steps h3 { font-size: 1.1rem; margin-top: 8px; }
+  .steps p { color: var(--ink-2); font-size: 0.98rem; margin-top: 4px; }
+  .alt { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid var(--line); font-size: var(--step--1); }
+
+  form { background: var(--board); border: 1.5px solid var(--ink); border-radius: 16px; padding: clamp(22px, 3vw, 36px); display: grid; gap: 22px; box-shadow: 0 24px 50px -34px rgba(21, 23, 28, 0.4); }
+  .hp { display: none; }
+  .sent { font-weight: 600; padding: 12px 14px; border-radius: 10px; background: var(--marker-wash); border: 1.5px dashed var(--marker); }
+  .field { display: grid; gap: 8px; }
+  .field label, legend { font-weight: 600; font-size: 0.95rem; }
+  .field small { color: var(--ink-2); font-size: 0.82rem; font-weight: 400; }
+  input[type="text"], input[type="email"], textarea {
+    font: inherit; color: var(--ink); background: var(--board-2);
+    border: 1.5px solid var(--line); border-radius: 10px; padding: 12px 14px; width: 100%;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--ink-2); opacity: 0.8; }
+  input:hover, textarea:hover { border-color: var(--ink-2); }
+  input:focus, textarea:focus { outline: none; border-color: var(--marker); background: var(--board); box-shadow: 0 0 0 4px var(--marker-wash); }
+  input:user-invalid, textarea:user-invalid { border-color: #c4352b; }
+  textarea { min-height: 140px; resize: vertical; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; align-items: start; }
+  fieldset { border: 0; padding: 0; margin: 0; display: grid; gap: 10px; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; }
+  .choices label { cursor: pointer; }
+  .choices input { position: absolute; opacity: 0; pointer-events: none; }
+  .choices span { display: inline-block; padding: 9px 14px; border: 1.5px solid var(--line); border-radius: 999px; font-weight: 500; font-size: 0.95rem; transition: all 0.15s; }
+  .choices label:hover span { border-color: var(--ink-2); }
+  .choices input:checked + span { background: var(--ink); color: var(--board); border-color: var(--ink); }
+  .choices input:focus-visible + span { outline: 2.5px solid var(--marker); outline-offset: 2px; }
+  .submit-row { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; justify-content: space-between; }
+  .submit-row .btn { border: 0; cursor: pointer; }
+  @media (max-width: 860px) { .hire { grid-template-columns: 1fr; } .hire-intro { position: static; } }
+  @media (max-width: 520px) { .row2 { grid-template-columns: 1fr; } }
+</style>
