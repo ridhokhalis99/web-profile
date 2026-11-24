@@ -6,7 +6,6 @@ import contentFeeds from "../data/contentFeeds";
 const videos = contentFeeds.tiktok;
 const articles = contentFeeds.medium;
 const articleTopics = ["Distributed systems", "Databases", "Engineering"];
-const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
 ---
 
 <Layout title="Ridho Khalis · Backend engineer and builder">
@@ -25,16 +24,12 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
             <a class="btn" href="/start">Start a project
               <svg class="arrow-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
             </a>
-            <a class="btn btn-ghost" href="/resume.pdf" target="_blank" rel="noopener">
-              <svg class="arrow-i" viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" /></svg>
-              Check my résumé
-            </a>
-            <a class="link-arrow" href="#work">See my work</a>
+            <a class="btn btn-ghost" href="#work">See my work</a>
           </div>
         </div>
 
         <div class="hero-diagram">
-          <svg viewBox="0 0 560 560" role="img" aria-label="Diagram: your idea goes to Ridho, who turns it into a product people use, like Rekanka.">
+          <svg viewBox="0 0 560 560" role="img" aria-label="Diagram: your idea goes to Ridho, who turns it into a product people use.">
             <defs><clipPath id="heroClip"><circle cx="405" cy="280" r="130" /><rect x="290" y="0" width="232" height="240" /></clipPath></defs>
             <g class="rough">
               <rect class="d-fill d-stroke" x="16" y="28" width="236" height="104" rx="10" />
@@ -52,21 +47,22 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
             <g class="rough"><path class="d-marker draw" style="--len:180;--d:.7s" marker-end="url(#head)" d="M150 262 C 180 300, 220 300, 262 280" /></g>
             <g class="rough"><path class="d-stroke draw" style="--len:240;--d:1s" marker-end="url(#head)" d="M366 420 C 350 446, 310 458, 262 460" /></g>
             <text class="d-hand" x="372" y="470" font-size="19">build &amp; ship</text>
-            <g class="rough"><rect class="d-fill d-stroke" x="16" y="414" width="244" height="120" rx="10" /></g>
-            <text class="d-text" x="38" y="456" font-size="24">A product</text>
-            <text class="d-text" x="38" y="484" font-size="24">people use</text>
-            <text class="d-mono" x="38" y="514" font-size="13">e.g. Rekanka · live</text>
+            <g class="rough"><rect class="d-fill d-stroke" x="16" y="414" width="244" height="96" rx="10" /></g>
+            <text class="d-text" x="38" y="454" font-size="24">A product</text>
+            <text class="d-text" x="38" y="483" font-size="24">people use</text>
           </svg>
         </div>
       </div>
     </section>
 
-    <div class="proof">
+    <div class="notes-strip">
       <ul class="wrap" aria-label="Background">
-        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Articles on <b>Medium</b></span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Videos on <b>TikTok</b></span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span><b>AWS Certified</b> Solutions Architect, Associate</span></li>
-        <li><svg viewBox="0 0 16 16" aria-hidden="true" set:html={check} /><span>Shipping software <b>since 2022</b></span></li>
+        <li class="note"><b>Since 2022</b><span>shipping software</span></li>
+        <li class="note"><b>AWS Certified</b><span>Solutions Architect, Associate</span></li>
+        <li class="note">
+          <b>Creator</b>
+          <span><a href="https://www.tiktok.com/@ridhokhalisp" target="_blank" rel="noopener noreferrer">AI &amp; automation on TikTok</a> · <a href="https://medium.com/@ridhokhalis" target="_blank" rel="noopener noreferrer">system design on Medium</a></span>
+        </li>
       </ul>
     </div>
 
@@ -90,7 +86,7 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
             <svg viewBox="0 0 64 40" aria-hidden="true"><g class="rough"><path class="d-marker" marker-end="url(#head)" d="M2 20 C 20 22, 40 18, 60 20" /></g></svg>
             <div class="path-body">
               <h3>A backend that holds up under load</h3>
-              <p>Reliability, data consistency and slow queries. My Ledgers project handled <span class="mono">1,000</span> concurrent users at <span class="mono">~179 ms p95</span> with zero errors.</p>
+              <p>Slow queries, flaky jobs, numbers that don't add up. I design backends that stay fast and correct when traffic spikes.</p>
               <a class="link-arrow" href="/start?need=backend">Talk backend</a>
             </div>
           </li>
@@ -211,14 +207,15 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
     <section class="section about" id="about">
       <div class="wrap">
         <figure class="portrait">
-          <svg viewBox="0 0 440 470" role="img" aria-label="Ridho Khalis, chin in hand, thinking">
+          <svg viewBox="0 0 440 530" role="img" aria-label="Ridho Khalis, chin in hand, thinking">
             <defs><clipPath id="aboutClip"><circle cx="220" cy="270" r="172" /><rect x="110" y="0" width="230" height="250" /></clipPath></defs>
             <path class="blob" d="M66 196 L 18 160 L 62 250 Z" />
             <circle class="blob" cx="220" cy="270" r="172" />
             <g class="rough"><path class="d-marker" d="M392 214 A 190 190 0 0 1 380 380" /><path class="d-marker" d="M60 420 A 196 196 0 0 0 150 452" /></g>
             <image href="/assets/images/ridho-about.webp" x="34" y="82" width="390" height="369" clip-path="url(#aboutClip)" />
+            <path id="capArc" d="M70 470 A 200 200 0 0 0 370 470" fill="none" />
+            <text class="d-hand cap"><textPath href="#capArc" startOffset="50%" text-anchor="middle">sketching the next one…</textPath></text>
           </svg>
-          <figcaption class="hand">sketching the next one…</figcaption>
         </figure>
         <div class="about-copy">
           <h2>Hey, I'm Ridho.</h2>
@@ -247,12 +244,18 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
   .hero-diagram svg { width: 100%; height: auto; }
   @media (max-width: 900px) { .hero .wrap { grid-template-columns: 1fr; } .hero-diagram { max-width: 520px; } }
 
-  .proof { border-block: 1px solid var(--line); background: var(--board-2); }
-  .proof ul { list-style: none; margin: 0 auto; padding-block: 18px; display: flex; flex-wrap: wrap; gap: 10px 0; justify-content: space-between; font-size: var(--step--1); color: var(--ink-2); }
-  .proof li { display: flex; align-items: center; gap: 10px; padding-right: 22px; }
-  .proof b { color: var(--ink); font-weight: 600; }
-  .proof svg { width: 16px; height: 16px; flex: none; }
-
+  .notes-strip { padding-block: 8px 24px; }
+  .notes-strip ul { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(16px, 3vw, 40px); }
+  .note { position: relative; display: grid; gap: 6px; align-content: start; padding: 26px 22px 22px; background: var(--note); color: var(--note-ink); border-radius: 3px; box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06), 0 14px 22px -16px rgba(0, 0, 0, 0.45); transform: rotate(-1.6deg); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+  .note:nth-child(2) { transform: rotate(1.2deg) translateY(6px); }
+  .note:nth-child(3) { transform: rotate(-0.8deg); }
+  .note:hover { transform: rotate(0deg) translateY(-3px); }
+  .note::before { content: ""; position: absolute; top: -11px; left: 50%; width: 84px; height: 22px; margin-left: -42px; background: var(--tape); transform: rotate(-3deg); }
+  .note b { font: 700 clamp(1.5rem, 1.2rem + 1vw, 2rem)/1.05 var(--display); letter-spacing: -0.02em; }
+  .note span { font-size: var(--step--1); line-height: 1.45; opacity: 0.85; }
+  .note a { text-decoration-color: currentColor; }
+  .note a:hover { color: var(--marker); }
+  @media (max-width: 760px) { .notes-strip ul { grid-template-columns: 1fr; max-width: 420px; gap: 22px; } }
   .help .wrap { display: grid; grid-template-columns: 0.8fr 1.4fr; gap: clamp(32px, 6vw, 96px); }
   .help-head { display: grid; gap: 14px; align-content: start; position: sticky; top: 100px; }
   .pick { font-size: 1.25rem; }
@@ -305,7 +308,7 @@ const check = '<path class="d-marker" d="M3 8.5l3 3 7-7"/>';
   .about .wrap { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: clamp(32px, 6vw, 88px); align-items: center; }
   .portrait { margin: 0; position: relative; max-width: 420px; }
   .portrait svg { width: 100%; height: auto; }
-  .portrait .hand { position: absolute; right: 0; bottom: -8px; font-size: 1.2rem; transform: rotate(-4deg); }
+  .portrait .cap { font-size: 22px; }
   .about-copy { display: grid; gap: 18px; justify-items: start; }
   .about-copy p { max-width: 58ch; color: var(--ink-2); }
   .about-copy p:first-of-type { color: var(--ink); font-size: var(--step-1); line-height: 1.5; }

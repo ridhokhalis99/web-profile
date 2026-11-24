@@ -12,6 +12,8 @@
   --marker-wash: rgba(31, 70, 200, 0.09);
   --tape: rgba(222, 214, 180, 0.72);
   --blob: #d4defb;
+  --note: #fbf0b5;
+  --note-ink: #2a2614;
 
   --display: "Fraunces", Georgia, "Times New Roman", serif;
   --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
@@ -33,14 +35,14 @@
   :root:not([data-theme="light"]) {
     --board: #121419; --board-2: #1a1d23; --ink: #ecede8; --ink-2: #a7acb5;
     --line: #2c3038; --dot: rgba(236, 237, 232, 0.08); --marker: #86a3ff;
-    --marker-ink: #0e1220; --marker-wash: rgba(134, 163, 255, 0.12); --tape: rgba(140, 132, 100, 0.55); --blob: #2a3a72;
+    --marker-ink: #0e1220; --marker-wash: rgba(134, 163, 255, 0.12); --tape: rgba(140, 132, 100, 0.55); --blob: #2a3a72; --note: #3b3720; --note-ink: #f3edcf;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
   --board: #121419; --board-2: #1a1d23; --ink: #ecede8; --ink-2: #a7acb5;
   --line: #2c3038; --dot: rgba(236, 237, 232, 0.08); --marker: #86a3ff;
-  --marker-ink: #0e1220; --marker-wash: rgba(134, 163, 255, 0.12); --tape: rgba(140, 132, 100, 0.55); --blob: #2a3a72;
+  --marker-ink: #0e1220; --marker-wash: rgba(134, 163, 255, 0.12); --tape: rgba(140, 132, 100, 0.55); --blob: #2a3a72; --note: #3b3720; --note-ink: #f3edcf;
   color-scheme: dark;
 }
 
@@ -57,7 +59,7 @@ body {
 }
 ::selection { background: var(--marker); color: var(--marker-ink); }
 a { color: inherit; text-underline-offset: 0.22em; text-decoration-thickness: 1.5px; }
-a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, label:focus-within {
+a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, summary:focus-visible {
   outline: 2.5px solid var(--marker); outline-offset: 3px; border-radius: 4px;
 }
 img { max-width: 100%; display: block; }

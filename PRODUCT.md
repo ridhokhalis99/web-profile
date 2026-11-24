@@ -10,7 +10,7 @@ web
 
 - Founders, small-business owners and teams who need software built and are deciding whether to hire Ridho (directly or through Erkabased) for a project.
 - Engineering leads and recruiters checking his background, skills and track record.
-- People who found him through his content (TikTok/Instagram @ridhobahastech, Medium, LinkedIn) and want to see who he is and what else he makes.
+- People who found him through his content (TikTok @ridhokhalisp, Instagram @ridhokhalisp, Medium, LinkedIn) and want to see who he is and what else he makes.
 
 ## Product Purpose
 
